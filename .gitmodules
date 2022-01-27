@@ -1,0 +1,3 @@
+[submodule "ug-engine"]
+	path = ug-engine
+	url = git@github.com:nfillion21/ug-engine.git
