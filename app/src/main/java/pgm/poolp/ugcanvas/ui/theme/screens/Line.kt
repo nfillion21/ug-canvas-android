@@ -76,11 +76,43 @@ fun CanvasDrawExample() {
             strokeWidth = size.width * 0.010f,
         )
 
+        // third vertical line
+        drawLine(
+            Color.White,
+            start = Offset(size.width * squareWidth * 4.5f, size.width * squareWidth * 1.5f),
+            end = Offset(size.width * squareWidth * 4.5f, size.width * squareWidth * 25.5f),
+            strokeWidth = size.width * 0.010f,
+        )
+
+        // fourth vertical line
+        drawLine(
+            Color.White,
+            start = Offset(size.width * squareWidth * 11.5f, size.width * squareWidth * 1.5f),
+            end = Offset(size.width * squareWidth * 11.5f, size.width * squareWidth * 25.5f),
+            strokeWidth = size.width * 0.010f,
+        )
+
         // bottom horizontal line
         drawLine(
             Color.White,
             start = Offset(size.width * halfSquareWidth, size.width * squareWidth * 26.5f),
             end = Offset(size.width - size.width * halfSquareWidth, size.width * squareWidth * 26.5f),
+            strokeWidth = size.width * 0.010f,
+        )
+
+        // line above
+        drawLine(
+            Color.White,
+            start = Offset(size.width * halfSquareWidth, size.width * squareWidth * 25.5f),
+            end = Offset(size.width - size.width * halfSquareWidth, size.width * squareWidth * 25.5f),
+            strokeWidth = size.width * 0.010f,
+        )
+
+        // center line
+        drawLine(
+            Color.White,
+            start = Offset(size.width * halfSquareWidth, size.width * squareWidth * 13.5f),
+            end = Offset(size.width - size.width * halfSquareWidth, size.width * squareWidth * 13.5f),
             strokeWidth = size.width * 0.010f,
         )
 
