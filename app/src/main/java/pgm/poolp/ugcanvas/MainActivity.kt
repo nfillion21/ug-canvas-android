@@ -4,10 +4,14 @@ import android.os.Bundle
 import android.util.DisplayMetrics
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import pgm.poolp.ugcanvas.ui.theme.UgcanvasTheme
+import androidx.compose.ui.Modifier
+import androidx.core.view.WindowCompat
+import com.google.accompanist.insets.ProvideWindowInsets
+import pgm.poolp.ugcanvas.ui.theme.UGCanvasTheme
 import pgm.poolp.ugcanvas.ui.theme.screens.CanvasDrawExample
 
 class MainActivity : ComponentActivity() {
@@ -17,11 +21,17 @@ class MainActivity : ComponentActivity() {
         val displayMetrics: DisplayMetrics = resources.displayMetrics
         val dpWidth = displayMetrics.widthPixels / displayMetrics.density
 
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+
         setContent {
-            UgcanvasTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(color = MaterialTheme.colors.background) {
-                    Greeting(dpWidth)
+            ProvideWindowInsets {
+                UGCanvasTheme {
+
+                    Scaffold(
+                        backgroundColor = MaterialTheme.colors.primarySurface,
+                    ) { innerPaddingModifier ->
+                        Greeting(dpWidth, innerPaddingModifier)
+                    }
                 }
             }
         }
@@ -29,9 +39,12 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(screenWidth: Float) {
+fun Greeting(screenWidth: Float, innerPaddingValues: PaddingValues) {
     //Text(text = "Hello $name!")
-    CanvasDrawExample(screenWidth = screenWidth)
+    CanvasDrawExample(
+        screenWidth = screenWidth,
+        modifier = Modifier.padding(innerPaddingValues)
+    )
 }
 
 /*

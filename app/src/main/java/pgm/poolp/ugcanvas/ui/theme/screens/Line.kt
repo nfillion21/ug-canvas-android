@@ -12,20 +12,24 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PointMode
 import androidx.compose.ui.unit.dp
+import com.google.accompanist.insets.navigationBarsPadding
+import com.google.accompanist.insets.statusBarsPadding
 
 
 //@Preview(showBackground = true)
 @Composable
-fun CanvasDrawExample(screenWidth:Float) {
+fun CanvasDrawExample(screenWidth:Float, modifier:Modifier) {
 
     val color = MaterialTheme.colors.secondary
     val halfSquareWidth = 0.03125f // 1/32
     val squareWidth = 0.0625f // 1/16
     val screenHeight = screenWidth*1.8
 
-    Column(modifier = Modifier
+    Column(modifier = modifier
         .fillMaxSize()
         .background(color)
+        .statusBarsPadding()
+        .navigationBarsPadding()
     ) {
 
     Canvas(modifier = Modifier
