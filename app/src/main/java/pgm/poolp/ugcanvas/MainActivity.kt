@@ -2,19 +2,19 @@ package pgm.poolp.ugcanvas
 
 import android.os.Bundle
 import android.util.DisplayMetrics
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.core.view.WindowCompat
-import com.google.accompanist.insets.ProvideWindowInsets
+import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import pgm.poolp.ugcanvas.ui.theme.UGCanvasTheme
-import pgm.poolp.ugcanvas.ui.theme.screens.CanvasDrawExample
+import pgm.poolp.ugcanvas.ui.theme.screens.CanvasDrawBoard
+import pgm.poolp.ugcanvas.ui.theme.screens.ExploreSection
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,14 +22,14 @@ class MainActivity : ComponentActivity() {
 
         val displayMetrics: DisplayMetrics = resources.displayMetrics
         val dpWidth = displayMetrics.widthPixels / displayMetrics.density
+        val dpHeight = displayMetrics.heightPixels / displayMetrics.density
 
-        WindowCompat.setDecorFitsSystemWindows(window, false)
+        //WindowCompat.setDecorFitsSystemWindows(window, false)
 
         setContent {
-            ProvideWindowInsets {
+            //ProvideWindowInsets {
                 UGCanvasTheme {
                     Scaffold(
-                        backgroundColor = MaterialTheme.colors.primarySurface,
                         drawerContent = {
                             /*
                             CraneDrawer(
@@ -45,35 +45,49 @@ class MainActivity : ComponentActivity() {
                         }
 
                         ) { innerPaddingModifier ->
-                        BoardScreen(dpWidth, Modifier.padding(innerPaddingModifier))
+                        BoardScreen(dpWidth, dpHeight, Modifier.padding(innerPaddingModifier))
                     }
                 }
-            }
+            //}
         }
     }
 }
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun BoardScreen(screenWidth: Float, modifier:Modifier) {
+fun BoardScreen(
+    screenWidth: Float,
+    screenHeight:Float,
+    modifier:Modifier) {
     //Text(text = "Hello $name!")
+
+    val scaffoldState = rememberBackdropScaffoldState(BackdropValue.Concealed)
+    val scope = rememberCoroutineScope()
 
     BackdropScaffold(
         modifier = modifier,
-        /*
-        scaffoldState = rememberBackdropScaffoldState(BackdropValue.Revealed),
-        frontLayerScrimColor = Color.Unspecified,
-        */
+        scaffoldState = scaffoldState,
+        stickyFrontLayer = false,
+        headerHeight = 64.dp,
+        peekHeight = (screenHeight*0.5f).dp,
         appBar = {
             //HomeTabBar(openDrawer, tabSelected, onTabSelected = { tabSelected = it })
         },
         backLayerContent = {
-            CanvasDrawExample(
+            CanvasDrawBoard(
+                revealBackdropScaffold = {
+                    scope.launch {
+                        scaffoldState.conceal()
+                    }
+                },
                 screenWidth = screenWidth,
                 modifier = modifier
             )
         },
         frontLayerContent = {
+            ExploreSection(
+                title = "Explore pictures of this character"
+            )
         }
     )
 }

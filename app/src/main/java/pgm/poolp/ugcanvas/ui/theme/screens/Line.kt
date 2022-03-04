@@ -12,27 +12,30 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PointMode
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.insets.navigationBarsPadding
 import com.google.accompanist.insets.statusBarsPadding
 
 
 //@Preview(showBackground = true)
 @Composable
-fun CanvasDrawExample(screenWidth:Float, modifier:Modifier) {
+fun CanvasDrawBoard(
+    screenWidth:Float,
+    modifier:Modifier,
+    revealBackdropScaffold: () -> Unit,
+) {
 
-    val color = MaterialTheme.colors.secondary
     val halfSquareWidth = 0.03125f // 1/32
     val squareWidth = 0.0625f // 1/16
     val screenHeight = screenWidth*1.8
 
     Column(modifier = modifier
         .fillMaxSize()
-        .background(color)
         .statusBarsPadding()
-        .navigationBarsPadding()
+        .clickable ( onClick = revealBackdropScaffold )
+        //.navigationBarsPadding()
     ) {
 
     Canvas(modifier = Modifier
+        .clickable ( onClick = revealBackdropScaffold )
         .horizontalScroll(rememberScrollState())
         .verticalScroll(rememberScrollState())
         //.padding(16.dp)
