@@ -2,7 +2,6 @@ package pgm.poolp.ugcanvas
 
 import android.os.Bundle
 import android.util.DisplayMetrics
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.padding
@@ -10,11 +9,14 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import pgm.poolp.ugcanvas.ui.theme.UGCanvasTheme
 import pgm.poolp.ugcanvas.ui.theme.screens.CanvasDrawBoard
 import pgm.poolp.ugcanvas.ui.theme.screens.ExploreSection
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,30 +26,36 @@ class MainActivity : ComponentActivity() {
         val dpWidth = displayMetrics.widthPixels / displayMetrics.density
         val dpHeight = displayMetrics.heightPixels / displayMetrics.density
 
-        //WindowCompat.setDecorFitsSystemWindows(window, false)
+        /*
+        val icon: Bitmap = BitmapFactory.decodeResource(
+            resources,
+            R.drawable.ic_launcher_background
+        )
+        */
+
 
         setContent {
             //ProvideWindowInsets {
-                UGCanvasTheme {
-                    Scaffold(
-                        drawerContent = {
-                            /*
-                            CraneDrawer(
-                                modifier = modifier,
-                                selectCharacter = {
-                                    mutableCharacterId = it
-                                    scope.launch {
-                                        scaffoldState.drawerState.close()
-                                    }
+            UGCanvasTheme {
+                Scaffold(
+                    drawerContent = {
+                        /*
+                        CraneDrawer(
+                            modifier = modifier,
+                            selectCharacter = {
+                                mutableCharacterId = it
+                                scope.launch {
+                                    scaffoldState.drawerState.close()
                                 }
-                            )
-                            */
-                        }
-
-                        ) { innerPaddingModifier ->
-                        BoardScreen(dpWidth, dpHeight, Modifier.padding(innerPaddingModifier))
+                            }
+                        )
+                        */
                     }
+
+                ) { innerPaddingModifier ->
+                    BoardScreen(dpWidth, dpHeight, Modifier.padding(innerPaddingModifier))
                 }
+            }
             //}
         }
     }
@@ -69,15 +77,21 @@ fun BoardScreen(
         scaffoldState = scaffoldState,
         stickyFrontLayer = false,
         headerHeight = 64.dp,
-        peekHeight = (screenHeight*0.5f).dp,
+        peekHeight = (screenHeight * 0.5f).dp,
         appBar = {
             //HomeTabBar(openDrawer, tabSelected, onTabSelected = { tabSelected = it })
         },
         backLayerContent = {
             CanvasDrawBoard(
                 revealBackdropScaffold = {
-                    scope.launch {
-                        scaffoldState.conceal()
+                    if (scaffoldState.isConcealed) {
+                        scope.launch {
+                            scaffoldState.reveal()
+                        }
+                    } else if (scaffoldState.isRevealed) {
+                        scope.launch {
+                            scaffoldState.conceal()
+                        }
                     }
                 },
                 screenWidth = screenWidth,

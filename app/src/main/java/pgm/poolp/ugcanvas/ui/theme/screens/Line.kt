@@ -1,18 +1,27 @@
 package pgm.poolp.ugcanvas.ui.theme.screens
 
+import android.os.Bundle
+import pgm.poolp.ugcanvas.R
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.PointMode
+import androidx.compose.ui.graphics.drawscope.Fill
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.res.imageResource
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.insets.statusBarsPadding
+import kotlin.math.roundToInt
 
 
 //@Preview(showBackground = true)
@@ -26,35 +35,22 @@ fun CanvasDrawBoard(
     val halfSquareWidth = 0.03125f // 1/32
     val squareWidth = 0.0625f // 1/16
     val screenHeight = screenWidth*1.8
+    val ic_image = ImageBitmap.imageResource(id = R.drawable.outline_sports_martial_arts_black_48)
 
     Column(modifier = modifier
         .fillMaxSize()
         .statusBarsPadding()
-        .clickable ( onClick = revealBackdropScaffold )
+        .clickable(onClick = revealBackdropScaffold)
         //.navigationBarsPadding()
     ) {
 
-    Canvas(modifier = Modifier
-        .clickable ( onClick = revealBackdropScaffold )
-        .horizontalScroll(rememberScrollState())
-        .verticalScroll(rememberScrollState())
-        //.padding(16.dp)
-        //.background(Color.White)
-        .width(screenWidth.dp)
-        .height(screenHeight.dp)
-            //.width(900.dp)
-            //.height(900.dp)
-            ///.fillMaxSize()
-            //.size(size = 800.dp)
+        Canvas(modifier = Modifier
+            .clickable(onClick = revealBackdropScaffold)
+            .horizontalScroll(rememberScrollState())
+            .verticalScroll(rememberScrollState())
+            .width(screenWidth.dp)
+            .height(screenHeight.dp)
         ) {
-            /*
-            drawRect(
-                color = color,
-                topLeft = Offset(0f, 0f),
-                size = Size(size.width, size.height)
-                //style = Stroke(width = size.width * 0.075f)
-            )
-            */
 
             // first horizontal line
             drawLine(
@@ -147,6 +143,13 @@ fun CanvasDrawBoard(
                     size.width * squareWidth * 13.5f
                 ),
                 strokeWidth = size.width * 0.010f,
+            )
+
+            drawImage(
+                image = ic_image,
+                dstOffset = IntOffset((size.width * squareWidth * 4.5).roundToInt(), (size.width * squareWidth * 11.5).roundToInt()),
+                dstSize = IntSize((size.width * squareWidth ).roundToInt(), (size.width * squareWidth).roundToInt()),
+                style = Fill
             )
 
             drawPoints(
