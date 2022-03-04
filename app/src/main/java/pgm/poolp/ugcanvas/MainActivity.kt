@@ -9,8 +9,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.core.view.WindowCompat
 import com.google.accompanist.insets.ProvideWindowInsets
+import kotlinx.coroutines.launch
 import pgm.poolp.ugcanvas.ui.theme.UGCanvasTheme
 import pgm.poolp.ugcanvas.ui.theme.screens.CanvasDrawExample
 
@@ -26,11 +28,24 @@ class MainActivity : ComponentActivity() {
         setContent {
             ProvideWindowInsets {
                 UGCanvasTheme {
-
                     Scaffold(
                         backgroundColor = MaterialTheme.colors.primarySurface,
-                    ) { innerPaddingModifier ->
-                        Greeting(dpWidth, innerPaddingModifier)
+                        drawerContent = {
+                            /*
+                            CraneDrawer(
+                                modifier = modifier,
+                                selectCharacter = {
+                                    mutableCharacterId = it
+                                    scope.launch {
+                                        scaffoldState.drawerState.close()
+                                    }
+                                }
+                            )
+                            */
+                        }
+
+                        ) { innerPaddingModifier ->
+                        BoardScreen(dpWidth, Modifier.padding(innerPaddingModifier))
                     }
                 }
             }
@@ -38,12 +53,28 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun Greeting(screenWidth: Float, innerPaddingValues: PaddingValues) {
+fun BoardScreen(screenWidth: Float, modifier:Modifier) {
     //Text(text = "Hello $name!")
-    CanvasDrawExample(
-        screenWidth = screenWidth,
-        modifier = Modifier.padding(innerPaddingValues)
+
+    BackdropScaffold(
+        modifier = modifier,
+        /*
+        scaffoldState = rememberBackdropScaffoldState(BackdropValue.Revealed),
+        frontLayerScrimColor = Color.Unspecified,
+        */
+        appBar = {
+            //HomeTabBar(openDrawer, tabSelected, onTabSelected = { tabSelected = it })
+        },
+        backLayerContent = {
+            CanvasDrawExample(
+                screenWidth = screenWidth,
+                modifier = modifier
+            )
+        },
+        frontLayerContent = {
+        }
     )
 }
 
