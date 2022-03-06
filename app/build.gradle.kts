@@ -62,6 +62,9 @@ dependencies {
 
     implementation(Dependencies.coreAndroidX)
 
+    //implementation(Dependencies.startupRuntime)
+    implementation("androidx.startup:startup-runtime:1.0.0")
+
     implementation(Dependencies.uiCompose)
     implementation (Dependencies.materialCompose)
     implementation (Dependencies.uiToolingPreviewCompose)
@@ -82,6 +85,9 @@ dependencies {
     implementation (Dependencies.accompanistInsets)
 
     implementation (Dependencies.appCompat)
+
+    implementation (Dependencies.workRuntine)
+    implementation (Dependencies.gson)
 
     // Hilt
     implementation (Dependencies.hiltAndroid)

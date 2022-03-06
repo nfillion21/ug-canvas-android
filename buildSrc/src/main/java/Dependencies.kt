@@ -3,6 +3,8 @@ object Dependencies {
     // Core Android
     val coreAndroidX by lazy {"androidx.core:core-ktx:${Versions.coreAndroidX}"}
 
+    //val startupRuntime by lazy {"androidx.core:core-ktx:${Versions.startupVersion}"}
+
     // Compose
     val uiCompose by lazy { "androidx.compose.ui:ui:${Versions.composeVersion}" }
     val materialCompose by lazy { "androidx.compose.material:material:${Versions.composeVersion}" }
@@ -40,4 +42,7 @@ object Dependencies {
     val coilCompose by lazy {"io.coil-kt:coil-compose:${Versions.coilVersion}"}
 
     val appCompat by lazy {"androidx.appcompat:appcompat:${Versions.appCompat}"}
+
+    val workRuntine by lazy {"androidx.work:work-runtime-ktx:${Versions.workVersion}"}
+    val gson by lazy {"com.google.code.gson:gson:${Versions.gsonVersion}"}
 }
