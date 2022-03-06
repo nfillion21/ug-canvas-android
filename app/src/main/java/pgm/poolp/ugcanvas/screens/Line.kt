@@ -1,6 +1,5 @@
-package pgm.poolp.ugcanvas.ui.theme.screens
+package pgm.poolp.ugcanvas.screens
 
-import android.os.Bundle
 import pgm.poolp.ugcanvas.R
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.Column
@@ -9,14 +8,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.graphics.PointMode
 import androidx.compose.ui.graphics.drawscope.Fill
-import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.res.imageResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
@@ -52,6 +46,7 @@ fun CanvasDrawBoard(
             .height(screenHeight.dp)
         ) {
 
+            /*
             // first horizontal line
             drawLine(
                 Color.White,
@@ -144,6 +139,7 @@ fun CanvasDrawBoard(
                 ),
                 strokeWidth = size.width * 0.010f,
             )
+            */
 
             drawImage(
                 image = ic_image,
@@ -152,6 +148,7 @@ fun CanvasDrawBoard(
                 style = Fill
             )
 
+            /*
             drawPoints(
                 points = listOf(
                     // 1st line
@@ -645,6 +642,7 @@ fun CanvasDrawBoard(
                 color = Color.DarkGray,
                 strokeWidth = size.width * 0.005f,
             )
+            */
         }
     }
 }

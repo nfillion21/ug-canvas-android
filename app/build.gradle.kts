@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -81,5 +82,16 @@ dependencies {
     implementation (Dependencies.accompanistInsets)
 
     implementation (Dependencies.appCompat)
-    implementation("androidx.core:core-ktx:+")
+
+    // Hilt
+    implementation (Dependencies.hiltAndroid)
+    kapt(Dependencies.hiltAndroidCompiler)
+    implementation (Dependencies.hiltNavigationCompose)
+
+    // Room
+    implementation (Dependencies.roomRuntine)
+    implementation (Dependencies.roomKtx)
+    annotationProcessor (Dependencies.roomCompiler)
+    kapt(Dependencies.roomCompiler)
+
 }

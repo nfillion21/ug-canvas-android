@@ -1,4 +1,4 @@
-package pgm.poolp.ugcanvas.ui.theme
+package pgm.poolp.ugcanvas.theme
 
 import androidx.compose.ui.graphics.Color
 

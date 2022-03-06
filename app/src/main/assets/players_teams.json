@@ -1,0 +1,34 @@
+[
+  {
+    "playerId": "human_01",
+    "teamId": "humans"
+  },
+  {
+    "playerId": "human_01",
+    "teamId": "humans"
+  },
+  {
+    "playerId": "human_01",
+    "teamId": "humans"
+  },
+  {
+    "playerId": "human_01",
+    "teamId": "humans"
+  },
+  {
+    "playerId": "orc_01",
+    "teamId": "orcs"
+  },
+  {
+    "playerId": "orc_01",
+    "teamId": "orcs"
+  },
+  {
+    "playerId": "orc_01",
+    "teamId": "orcs"
+  },
+  {
+    "playerId": "orc_01",
+    "teamId": "orcs"
+  }
+]

@@ -9,15 +9,14 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.unit.dp
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import pgm.poolp.ugcanvas.ui.theme.UGCanvasTheme
-import pgm.poolp.ugcanvas.ui.theme.screens.CanvasDrawBoard
-import pgm.poolp.ugcanvas.ui.theme.screens.ExploreSection
+import pgm.poolp.ugcanvas.theme.UGCanvasTheme
+import pgm.poolp.ugcanvas.screens.CanvasDrawBoard
+import pgm.poolp.ugcanvas.screens.ExploreSection
 
-
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
