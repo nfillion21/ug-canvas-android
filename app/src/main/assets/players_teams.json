@@ -4,15 +4,15 @@
     "teamId": "humans"
   },
   {
-    "playerId": "human_01",
+    "playerId": "human_02",
     "teamId": "humans"
   },
   {
-    "playerId": "human_01",
+    "playerId": "human_03",
     "teamId": "humans"
   },
   {
-    "playerId": "human_01",
+    "playerId": "human_04",
     "teamId": "humans"
   },
   {
@@ -20,15 +20,15 @@
     "teamId": "orcs"
   },
   {
-    "playerId": "orc_01",
+    "playerId": "orc_02",
     "teamId": "orcs"
   },
   {
-    "playerId": "orc_01",
+    "playerId": "orc_03",
     "teamId": "orcs"
   },
   {
-    "playerId": "orc_01",
+    "playerId": "orc_04",
     "teamId": "orcs"
   }
 ]

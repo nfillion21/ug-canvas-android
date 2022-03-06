@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.drawscope.Fill
@@ -14,7 +16,9 @@ import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.insets.statusBarsPadding
+import pgm.poolp.ugcanvas.viewmodels.TeamViewModel
 import kotlin.math.roundToInt
 
 
@@ -30,6 +34,9 @@ fun CanvasDrawBoard(
     val squareWidth = 0.0625f // 1/16
     val screenHeight = screenWidth*1.8
     val ic_image = ImageBitmap.imageResource(id = R.drawable.outline_sports_martial_arts_black_48)
+
+    val vm: TeamViewModel = hiltViewModel()
+    val suggestedTeamWithPlayers by vm.teamWithPlayers("orcs").collectAsState(initial = null)
 
     Column(modifier = modifier
         .fillMaxSize()
@@ -141,12 +148,14 @@ fun CanvasDrawBoard(
             )
             */
 
-            drawImage(
-                image = ic_image,
-                dstOffset = IntOffset((size.width * squareWidth * 4.5).roundToInt(), (size.width * squareWidth * 11.5).roundToInt()),
-                dstSize = IntSize((size.width * squareWidth ).roundToInt(), (size.width * squareWidth).roundToInt()),
-                style = Fill
-            )
+            suggestedTeamWithPlayers?.let { teamWithPlayers ->
+                drawImage(
+                    image = ic_image,
+                    dstOffset = IntOffset((size.width * squareWidth * 4.5).roundToInt(), (size.width * squareWidth * 11.5).roundToInt()),
+                    dstSize = IntSize((size.width * squareWidth ).roundToInt(), (size.width * squareWidth).roundToInt()),
+                    style = Fill
+                )
+            }
 
             /*
             drawPoints(

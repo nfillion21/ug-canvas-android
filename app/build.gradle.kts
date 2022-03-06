@@ -63,7 +63,7 @@ dependencies {
     implementation(Dependencies.coreAndroidX)
 
     //implementation(Dependencies.startupRuntime)
-    implementation("androidx.startup:startup-runtime:1.0.0")
+    //implementation("androidx.startup:startup-runtime:1.0.0")
 
     implementation(Dependencies.uiCompose)
     implementation (Dependencies.materialCompose)

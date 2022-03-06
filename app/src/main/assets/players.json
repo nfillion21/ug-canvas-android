@@ -4,7 +4,32 @@
     "name": "Human 01"
   },
   {
+    "playerId": "human_02",
+    "name": "Human 01"
+  },
+  {
+    "playerId": "human_03",
+    "name": "Human 01"
+  },
+  {
+    "playerId": "human_04",
+    "name": "Human 01"
+  },
+  {
     "playerId": "orc_01",
     "name": "Orc 01"
+  },
+  {
+    "playerId": "orc_02",
+    "name": "Orc 02"
+  },
+  {
+    "playerId": "orc_03",
+    "name": "Orc 03"
+  },
+
+  {
+    "playerId": "orc_04",
+    "name": "Orc 04"
   }
 ]
