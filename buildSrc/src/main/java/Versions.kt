@@ -17,7 +17,7 @@ object Versions {
     const val hiltNavigationComposeVersion = "1.0.0"
     const val roomVersion = "2.4.1"
 
-    const val workVersion = "2.4.0"
+    const val workVersion = "2.7.1"
     const val gsonVersion = "2.8.2"
 
     const val accompanistVersion = "0.22.1-rc"

@@ -25,10 +25,10 @@ interface TeamDAO {
     @Query("select * from skill where skillId = :skillId")
     fun getSkill(skillId: String): Flow<Skill>
 
-    @Transaction
-    @Query("select * from skill where skillId = :skillId")
-    fun getSkillWithChampions(skillId: String): Flow<SkillWithChampions>
     */
+    @Transaction
+    @Query("select * from team where teamId = :teamId")
+    fun getTeamWithPlayers(teamId: String): Flow<TeamWithPlayers>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(teams: List<Team>)

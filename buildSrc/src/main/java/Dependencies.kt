@@ -43,6 +43,6 @@ object Dependencies {
 
     val appCompat by lazy {"androidx.appcompat:appcompat:${Versions.appCompat}"}
 
-    val workRuntine by lazy {"androidx.work:work-runtime-ktx:${Versions.workVersion}"}
+    val workRuntime by lazy {"androidx.work:work-runtime-ktx:${Versions.workVersion}"}
     val gson by lazy {"com.google.code.gson:gson:${Versions.gsonVersion}"}
 }

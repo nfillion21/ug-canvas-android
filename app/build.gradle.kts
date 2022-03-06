@@ -86,7 +86,7 @@ dependencies {
 
     implementation (Dependencies.appCompat)
 
-    implementation (Dependencies.workRuntine)
+    implementation (Dependencies.workRuntime)
     implementation (Dependencies.gson)
 
     // Hilt

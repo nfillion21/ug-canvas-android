@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.util.DisplayMetrics
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -15,6 +17,7 @@ import kotlinx.coroutines.launch
 import pgm.poolp.ugcanvas.theme.UGCanvasTheme
 import pgm.poolp.ugcanvas.screens.CanvasDrawBoard
 import pgm.poolp.ugcanvas.screens.ExploreSection
+import pgm.poolp.ugcanvas.viewmodels.TeamViewModel
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -68,7 +71,7 @@ fun BoardScreen(
     modifier:Modifier) {
     //Text(text = "Hello $name!")
 
-    val scaffoldState = rememberBackdropScaffoldState(BackdropValue.Concealed)
+    val scaffoldState = rememberBackdropScaffoldState(BackdropValue.Revealed)
     val scope = rememberCoroutineScope()
 
     BackdropScaffold(
