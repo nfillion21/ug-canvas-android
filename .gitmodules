@@ -1,0 +1,3 @@
+[submodule "canvas-engine"]
+	path = canvas-engine
+	url = git@github.com:nfillion21/canvas-engine.git
