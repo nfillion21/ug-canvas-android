@@ -10,7 +10,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.PointMode
 import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.unit.IntOffset
@@ -33,10 +36,13 @@ fun CanvasDrawBoard(
     val halfSquareWidth = 0.03125f // 1/32
     val squareWidth = 0.0625f // 1/16
     val screenHeight = screenWidth*1.8
-    val ic_image = ImageBitmap.imageResource(id = R.drawable.outline_sports_martial_arts_black_48)
+
+    val humanImage = ImageBitmap.imageResource(id = R.drawable.outline_sports_martial_arts_black_48)
+    val orcImage = ImageBitmap.imageResource(id = R.drawable.outline_directions_run_black_48)
 
     val vm: TeamViewModel = hiltViewModel()
-    val suggestedTeamWithPlayers by vm.teamWithPlayers("orcs").collectAsState(initial = null)
+    val suggestedTeamWithPlayers by vm.teamWithPlayers("humans").collectAsState(initial = null)
+    val suggestedOrcsTeam by vm.teamWithPlayers("orcs").collectAsState(initial = null)
 
     Column(modifier = modifier
         .fillMaxSize()
@@ -53,7 +59,6 @@ fun CanvasDrawBoard(
             .height(screenHeight.dp)
         ) {
 
-            /*
             // first horizontal line
             drawLine(
                 Color.White,
@@ -146,18 +151,44 @@ fun CanvasDrawBoard(
                 ),
                 strokeWidth = size.width * 0.010f,
             )
-            */
 
             suggestedTeamWithPlayers?.let { teamWithPlayers ->
-                drawImage(
-                    image = ic_image,
-                    dstOffset = IntOffset((size.width * squareWidth * 4.5).roundToInt(), (size.width * squareWidth * 11.5).roundToInt()),
-                    dstSize = IntSize((size.width * squareWidth ).roundToInt(), (size.width * squareWidth).roundToInt()),
-                    style = Fill
-                )
+
+                for (player in teamWithPlayers.players)
+                {
+                    val position = player.position
+                    val pos = position.split("_")
+                    val xPos = pos[0].toInt()
+                    val yPos = pos[1].toInt()
+
+                    drawImage(
+                        image = humanImage,
+                        dstOffset = IntOffset((size.width * squareWidth  *(xPos - 0.5)).roundToInt(), (size.width * squareWidth * (yPos - 0.5)).roundToInt()),
+                        dstSize = IntSize((size.width * squareWidth ).roundToInt(), (size.width * squareWidth).roundToInt()),
+                        style = Fill
+                    )
+                }
+
             }
 
-            /*
+            suggestedOrcsTeam?.let { teamWithPlayers ->
+
+                for (player in teamWithPlayers.players)
+                {
+                    val position = player.position
+                    val pos = position.split("_")
+                    val xPos = pos[0].toInt()
+                    val yPos = pos[1].toInt()
+
+                    drawImage(
+                        image = orcImage,
+                        dstOffset = IntOffset((size.width * squareWidth * (xPos + 0.5)).toInt(), (size.width * squareWidth * (yPos+0.5)).roundToInt()),
+                        dstSize = IntSize((size.width * squareWidth ).roundToInt(), (size.width * squareWidth).roundToInt()),
+                        style = Fill
+                    )
+                }
+            }
+
             drawPoints(
                 points = listOf(
                     // 1st line
@@ -359,7 +390,7 @@ fun CanvasDrawBoard(
                     Offset(size.width * squareWidth * 14.5f, size.width * squareWidth * 10.5f),
                     Offset(size.width * squareWidth * 15.5f, size.width * squareWidth * 10.5f),
 
-                    // 11th line
+                    // 12h line
                     Offset(size.width * squareWidth * 0.5f, size.width * squareWidth * 11.5f),
                     Offset(size.width * squareWidth * 1.5f, size.width * squareWidth * 11.5f),
                     Offset(size.width * squareWidth * 2.5f, size.width * squareWidth * 11.5f),
@@ -377,7 +408,7 @@ fun CanvasDrawBoard(
                     Offset(size.width * squareWidth * 14.5f, size.width * squareWidth * 11.5f),
                     Offset(size.width * squareWidth * 15.5f, size.width * squareWidth * 11.5f),
 
-                    // 11th line
+                    // 13th line
                     Offset(size.width * squareWidth * 0.5f, size.width * squareWidth * 12.5f),
                     Offset(size.width * squareWidth * 1.5f, size.width * squareWidth * 12.5f),
                     Offset(size.width * squareWidth * 2.5f, size.width * squareWidth * 12.5f),
@@ -395,7 +426,7 @@ fun CanvasDrawBoard(
                     Offset(size.width * squareWidth * 14.5f, size.width * squareWidth * 12.5f),
                     Offset(size.width * squareWidth * 15.5f, size.width * squareWidth * 12.5f),
 
-                    // 11th line
+                    // 14th line
                     Offset(size.width * squareWidth * 0.5f, size.width * squareWidth * 13.5f),
                     Offset(size.width * squareWidth * 1.5f, size.width * squareWidth * 13.5f),
                     Offset(size.width * squareWidth * 2.5f, size.width * squareWidth * 13.5f),
@@ -413,7 +444,7 @@ fun CanvasDrawBoard(
                     Offset(size.width * squareWidth * 14.5f, size.width * squareWidth * 13.5f),
                     Offset(size.width * squareWidth * 15.5f, size.width * squareWidth * 13.5f),
 
-                    // 11th line
+                    // 15th line
                     Offset(size.width * squareWidth * 0.5f, size.width * squareWidth * 14.5f),
                     Offset(size.width * squareWidth * 1.5f, size.width * squareWidth * 14.5f),
                     Offset(size.width * squareWidth * 2.5f, size.width * squareWidth * 14.5f),
@@ -431,7 +462,7 @@ fun CanvasDrawBoard(
                     Offset(size.width * squareWidth * 14.5f, size.width * squareWidth * 14.5f),
                     Offset(size.width * squareWidth * 15.5f, size.width * squareWidth * 14.5f),
 
-                    // 11th line
+                    // 16th line
                     Offset(size.width * squareWidth * 0.5f, size.width * squareWidth * 15.5f),
                     Offset(size.width * squareWidth * 1.5f, size.width * squareWidth * 15.5f),
                     Offset(size.width * squareWidth * 2.5f, size.width * squareWidth * 15.5f),
@@ -450,7 +481,7 @@ fun CanvasDrawBoard(
                     Offset(size.width * squareWidth * 15.5f, size.width * squareWidth * 15.5f),
 
 
-                    // 11th line
+                    // 17th line
                     Offset(size.width * squareWidth * 0.5f, size.width * squareWidth * 16.5f),
                     Offset(size.width * squareWidth * 1.5f, size.width * squareWidth * 16.5f),
                     Offset(size.width * squareWidth * 2.5f, size.width * squareWidth * 16.5f),
@@ -468,7 +499,7 @@ fun CanvasDrawBoard(
                     Offset(size.width * squareWidth * 14.5f, size.width * squareWidth * 16.5f),
                     Offset(size.width * squareWidth * 15.5f, size.width * squareWidth * 16.5f),
 
-                    // 11th line
+                    // 18th line
                     Offset(size.width * squareWidth * 0.5f, size.width * squareWidth * 17.5f),
                     Offset(size.width * squareWidth * 1.5f, size.width * squareWidth * 17.5f),
                     Offset(size.width * squareWidth * 2.5f, size.width * squareWidth * 17.5f),
@@ -486,7 +517,7 @@ fun CanvasDrawBoard(
                     Offset(size.width * squareWidth * 14.5f, size.width * squareWidth * 17.5f),
                     Offset(size.width * squareWidth * 15.5f, size.width * squareWidth * 17.5f),
 
-                    // 11th line
+                    // 19th line
                     Offset(size.width * squareWidth * 0.5f, size.width * squareWidth * 18.5f),
                     Offset(size.width * squareWidth * 1.5f, size.width * squareWidth * 18.5f),
                     Offset(size.width * squareWidth * 2.5f, size.width * squareWidth * 18.5f),
@@ -504,7 +535,7 @@ fun CanvasDrawBoard(
                     Offset(size.width * squareWidth * 14.5f, size.width * squareWidth * 18.5f),
                     Offset(size.width * squareWidth * 15.5f, size.width * squareWidth * 18.5f),
 
-                    // 11th line
+                    // 20th line
                     Offset(size.width * squareWidth * 0.5f, size.width * squareWidth * 19.5f),
                     Offset(size.width * squareWidth * 1.5f, size.width * squareWidth * 19.5f),
                     Offset(size.width * squareWidth * 2.5f, size.width * squareWidth * 19.5f),
@@ -521,7 +552,7 @@ fun CanvasDrawBoard(
                     Offset(size.width * squareWidth * 13.5f, size.width * squareWidth * 19.5f),
                     Offset(size.width * squareWidth * 14.5f, size.width * squareWidth * 19.5f),
                     Offset(size.width * squareWidth * 15.5f, size.width * squareWidth * 19.5f),
-                    // 11th line
+                    // 21th line
                     Offset(size.width * squareWidth * 0.5f, size.width * squareWidth * 20.5f),
                     Offset(size.width * squareWidth * 1.5f, size.width * squareWidth * 20.5f),
                     Offset(size.width * squareWidth * 2.5f, size.width * squareWidth * 20.5f),
@@ -539,7 +570,7 @@ fun CanvasDrawBoard(
                     Offset(size.width * squareWidth * 14.5f, size.width * squareWidth * 20.5f),
                     Offset(size.width * squareWidth * 15.5f, size.width * squareWidth * 20.5f),
 
-                    // 11th line
+                    // 22th line
                     Offset(size.width * squareWidth * 0.5f, size.width * squareWidth * 21.5f),
                     Offset(size.width * squareWidth * 1.5f, size.width * squareWidth * 21.5f),
                     Offset(size.width * squareWidth * 2.5f, size.width * squareWidth * 21.5f),
@@ -557,7 +588,7 @@ fun CanvasDrawBoard(
                     Offset(size.width * squareWidth * 14.5f, size.width * squareWidth * 21.5f),
                     Offset(size.width * squareWidth * 15.5f, size.width * squareWidth * 21.5f),
 
-                    // 11th line
+                    // 23th line
                     Offset(size.width * squareWidth * 0.5f, size.width * squareWidth * 22.5f),
                     Offset(size.width * squareWidth * 1.5f, size.width * squareWidth * 22.5f),
                     Offset(size.width * squareWidth * 2.5f, size.width * squareWidth * 22.5f),
@@ -575,7 +606,7 @@ fun CanvasDrawBoard(
                     Offset(size.width * squareWidth * 14.5f, size.width * squareWidth * 22.5f),
                     Offset(size.width * squareWidth * 15.5f, size.width * squareWidth * 22.5f),
 
-                    // 11th line
+                    // 24th line
                     Offset(size.width * squareWidth * 0.5f, size.width * squareWidth * 23.5f),
                     Offset(size.width * squareWidth * 1.5f, size.width * squareWidth * 23.5f),
                     Offset(size.width * squareWidth * 2.5f, size.width * squareWidth * 23.5f),
@@ -593,7 +624,7 @@ fun CanvasDrawBoard(
                     Offset(size.width * squareWidth * 14.5f, size.width * squareWidth * 23.5f),
                     Offset(size.width * squareWidth * 15.5f, size.width * squareWidth * 23.5f),
 
-                    // 11th line
+                    // 25th line
                     Offset(size.width * squareWidth * 0.5f, size.width * squareWidth * 24.5f),
                     Offset(size.width * squareWidth * 1.5f, size.width * squareWidth * 24.5f),
                     Offset(size.width * squareWidth * 2.5f, size.width * squareWidth * 24.5f),
@@ -611,7 +642,7 @@ fun CanvasDrawBoard(
                     Offset(size.width * squareWidth * 14.5f, size.width * squareWidth * 24.5f),
                     Offset(size.width * squareWidth * 15.5f, size.width * squareWidth * 24.5f),
 
-                    // 11th line
+                    // 26th line
                     Offset(size.width * squareWidth * 0.5f, size.width * squareWidth * 25.5f),
                     Offset(size.width * squareWidth * 1.5f, size.width * squareWidth * 25.5f),
                     Offset(size.width * squareWidth * 2.5f, size.width * squareWidth * 25.5f),
@@ -629,7 +660,7 @@ fun CanvasDrawBoard(
                     Offset(size.width * squareWidth * 14.5f, size.width * squareWidth * 25.5f),
                     Offset(size.width * squareWidth * 15.5f, size.width * squareWidth * 25.5f),
 
-                    // 11th line
+                    // 27th line
                     Offset(size.width * squareWidth * 0.5f, size.width * squareWidth * 26.5f),
                     Offset(size.width * squareWidth * 1.5f, size.width * squareWidth * 26.5f),
                     Offset(size.width * squareWidth * 2.5f, size.width * squareWidth * 26.5f),
@@ -651,7 +682,6 @@ fun CanvasDrawBoard(
                 color = Color.DarkGray,
                 strokeWidth = size.width * 0.005f,
             )
-            */
         }
     }
 }

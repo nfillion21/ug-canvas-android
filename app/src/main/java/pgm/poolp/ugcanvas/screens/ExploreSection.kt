@@ -27,7 +27,7 @@ fun ExploreSection(
 ) {
 
     val vm: TeamViewModel = hiltViewModel()
-    val suggestedTeamWithPlayers by vm.teamWithPlayers("orcs").collectAsState(initial = null)
+    val suggestedTeamWithPlayers by vm.teamWithPlayers("humans").collectAsState(initial = null)
 
     Surface(modifier = modifier.fillMaxSize(), color = Color.White, shape = BottomSheetShape) {
         LazyColumn(modifier = Modifier.padding(start = 24.dp, top = 20.dp, end = 24.dp)) {
@@ -36,7 +36,7 @@ fun ExploreSection(
 
                 items(teamWithPlayers.players) { player ->
                     Text(
-                        text = player.name,
+                        text = player.position,
                         style = MaterialTheme.typography.h5,
                         /*
                         modifier = Modifier
