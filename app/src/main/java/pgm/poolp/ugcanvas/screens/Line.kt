@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.insets.statusBarsPadding
+import pgm.poolp.ugcanvas.utilities.Utils
 import pgm.poolp.ugcanvas.viewmodels.TeamViewModel
 import kotlin.math.roundToInt
 
@@ -157,7 +158,8 @@ fun CanvasDrawBoard(
                 for (player in teamWithPlayers.players)
                 {
                     val position = player.position
-                    val pos = position.split("_")
+                    val numberedPos = Utils.fromOfficialPosToNumberedPos(position)
+                    val pos = numberedPos.split("_")
                     val xPos = pos[0].toInt()
                     val yPos = pos[1].toInt()
 
@@ -176,7 +178,8 @@ fun CanvasDrawBoard(
                 for (player in teamWithPlayers.players)
                 {
                     val position = player.position
-                    val pos = position.split("_")
+                    val numberedPos = Utils.fromOfficialPosToNumberedPos(position)
+                    val pos = numberedPos.split("_")
                     val xPos = pos[0].toInt()
                     val yPos = pos[1].toInt()
 
@@ -188,7 +191,7 @@ fun CanvasDrawBoard(
                     )
                 }
             }
-
+/*
             drawPoints(
                 points = listOf(
                     // 1st line
@@ -682,6 +685,7 @@ fun CanvasDrawBoard(
                 color = Color.DarkGray,
                 strokeWidth = size.width * 0.005f,
             )
+            */
         }
     }
 }
