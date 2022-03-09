@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "815406310942",
+    "project_id": "ug-canvas",
+    "storage_bucket": "ug-canvas.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:815406310942:android:05b68032281ec38fa1300f",
+        "android_client_info": {
+          "package_name": "pgm.poolp.ugcanvas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "815406310942-3cagot13oh4k872slbdg932ndjn4r7q5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVf_8B7w2gnv8diDl-ONxZuudnH3tOLB4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "815406310942-3cagot13oh4k872slbdg932ndjn4r7q5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

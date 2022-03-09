@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
     id("dagger.hilt.android.plugin")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -99,5 +100,9 @@ dependencies {
     implementation (Dependencies.roomKtx)
     annotationProcessor (Dependencies.roomCompiler)
     kapt(Dependencies.roomCompiler)
+
+    implementation (platform(Dependencies.firebasePlatform))
+    implementation (Dependencies.firebaseAnalytics)
+    implementation(Dependencies.firebaseDatabase)
 
 }

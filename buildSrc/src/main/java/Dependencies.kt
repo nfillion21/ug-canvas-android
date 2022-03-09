@@ -45,4 +45,8 @@ object Dependencies {
 
     val workRuntime by lazy {"androidx.work:work-runtime-ktx:${Versions.workVersion}"}
     val gson by lazy {"com.google.code.gson:gson:${Versions.gsonVersion}"}
+
+    val firebasePlatform by lazy {"com.google.firebase:firebase-bom:${Versions.firebaseVersion}"}
+    val firebaseAnalytics by lazy {"com.google.firebase:firebase-analytics-ktx"}
+    val firebaseDatabase by lazy {"com.google.firebase:firebase-database-ktx"}
 }

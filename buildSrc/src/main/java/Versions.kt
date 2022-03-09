@@ -3,6 +3,8 @@ object Versions {
     const val gradlePlugin = "4.2.1"
     const val kotlin = "1.5.0"
 
+    const val gmsVersion = "4.3.10"
+
     const val startupVersion = "1.0.0"
 
     const val composeVersion = "1.0.5"
@@ -23,4 +25,6 @@ object Versions {
     const val accompanistVersion = "0.22.1-rc"
     const val coilVersion = "1.4.0"
     const val appCompat = "1.4.1"
+
+    const val firebaseVersion = "29.1.0"
 }
