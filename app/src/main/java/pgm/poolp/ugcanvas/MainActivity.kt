@@ -9,9 +9,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import pgm.poolp.ugcanvas.theme.UGCanvasTheme
@@ -74,6 +77,8 @@ fun BoardScreen(
     val scaffoldState = rememberBackdropScaffoldState(BackdropValue.Revealed)
     val scope = rememberCoroutineScope()
 
+    val vm: TeamViewModel = hiltViewModel()
+
     BackdropScaffold(
         modifier = modifier,
         scaffoldState = scaffoldState,
@@ -102,7 +107,11 @@ fun BoardScreen(
         },
         frontLayerContent = {
             ExploreSection(
-                title = "Explore pictures of this character"
+                //title = "Explore pictures of this character"
+                viewModel = vm,
+                launchGame = {
+                    //vm.setDataBoard()
+                },
             )
         }
     )

@@ -17,20 +17,23 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.asLiveData
+import pgm.poolp.ugcanvas.data.TeamWithPlayers
 import pgm.poolp.ugcanvas.theme.BottomSheetShape
 import pgm.poolp.ugcanvas.viewmodels.TeamViewModel
 
 @Composable
 fun ExploreSection(
     modifier: Modifier = Modifier,
-    title: String
+    viewModel: TeamViewModel,
+    launchGame: (TeamWithPlayers) -> Unit
 ) {
 
-    val vm: TeamViewModel = hiltViewModel()
-    val suggestedTeamWithPlayers by vm.teamWithPlayers("humans").collectAsState(initial = null)
+    val suggestedTeamWithPlayers by viewModel.teamWithPlayers("humans").collectAsState(initial = null)
 
     Surface(modifier = modifier.fillMaxSize(), color = Color.White, shape = BottomSheetShape) {
-        LazyColumn(modifier = Modifier.padding(start = 24.dp, top = 20.dp, end = 24.dp)) {
+        LazyColumn(modifier = Modifier
+            .padding(start = 24.dp, top = 20.dp, end = 24.dp)
+        ) {
 
             suggestedTeamWithPlayers?.let { teamWithPlayers ->
 
@@ -38,6 +41,7 @@ fun ExploreSection(
                     Text(
                         text = player.position,
                         style = MaterialTheme.typography.h5,
+                        modifier = Modifier.clickable { launchGame(teamWithPlayers) }
                         /*
                         modifier = Modifier
                             .fillMaxWidth()

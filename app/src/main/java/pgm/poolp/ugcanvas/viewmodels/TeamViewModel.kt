@@ -1,16 +1,15 @@
 package pgm.poolp.ugcanvas.viewmodels
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import pgm.poolp.ugcanvas.data.TeamRepository
 import pgm.poolp.ugcanvas.data.TeamWithPlayers
+import pgm.poolp.ugcanvas.data.UGCanvasRepository
 import javax.inject.Inject
 
 @HiltViewModel
-class TeamViewModel @Inject internal constructor(private val teamRepository: TeamRepository) : ViewModel()
+class TeamViewModel @Inject internal constructor(private val teamRepository: TeamRepository, private val canvasRepository: UGCanvasRepository) : ViewModel()
 {
 
     //val skillId: String = savedStateHandle.get<String>(SKILL_ID_SAVED_STATE_KEY)!!
@@ -19,5 +18,9 @@ class TeamViewModel @Inject internal constructor(private val teamRepository: Tea
 
     fun teamWithPlayers(teamId:String): Flow<TeamWithPlayers> {
         return teamRepository.getTeamWithPlayers(teamId)//.asLiveData()
+    }
+
+    fun setDataBoard(data:String) {
+        canvasRepository.setDataBoard(data = data)
     }
 }
