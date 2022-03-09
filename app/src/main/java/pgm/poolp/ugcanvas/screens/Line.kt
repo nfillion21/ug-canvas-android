@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -21,6 +22,10 @@ import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.insets.statusBarsPadding
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import pgm.poolp.ugcanvas.data.TeamWithPlayers
 import pgm.poolp.ugcanvas.utilities.Utils
 import pgm.poolp.ugcanvas.viewmodels.TeamViewModel
 import kotlin.math.roundToInt
@@ -29,6 +34,7 @@ import kotlin.math.roundToInt
 //@Preview(showBackground = true)
 @Composable
 fun CanvasDrawBoard(
+    viewModel: TeamViewModel,
     screenWidth:Float,
     modifier:Modifier,
     revealBackdropScaffold: () -> Unit,
@@ -41,9 +47,25 @@ fun CanvasDrawBoard(
     val humanImage = ImageBitmap.imageResource(id = R.drawable.outline_sports_martial_arts_black_48)
     val orcImage = ImageBitmap.imageResource(id = R.drawable.outline_directions_run_black_48)
 
+    /*
     val vm: TeamViewModel = hiltViewModel()
     val suggestedTeamWithPlayers by vm.teamWithPlayers("humans").collectAsState(initial = null)
     val suggestedOrcsTeam by vm.teamWithPlayers("orcs").collectAsState(initial = null)
+     */
+
+    val suggestedTeamWithPlayers by viewModel.teamWithPlayers().collectAsState(initial = null)
+
+    /*
+    teamWithPlayers?.let {
+        items(teamWithPlayers.players) { player ->
+            Text(
+                text = player.position,
+                style = MaterialTheme.typography.h5,
+                modifier = Modifier.clickable { launchGame(teamWithPlayers) }
+            )
+        }
+    }
+    */
 
     Column(modifier = modifier
         .fillMaxSize()
@@ -153,26 +175,38 @@ fun CanvasDrawBoard(
                 strokeWidth = size.width * 0.010f,
             )
 
-            suggestedTeamWithPlayers?.let { teamWithPlayers ->
+            suggestedTeamWithPlayers?.let { teamWithPlayersStr ->
 
-                for (player in teamWithPlayers.players)
-                {
-                    val position = player.position
-                    val numberedPos = Utils.fromOfficialPosToNumberedPos(position)
-                    val pos = numberedPos.split("_")
-                    val xPos = pos[0].toInt()
-                    val yPos = pos[1].toInt()
+                if (!teamWithPlayersStr.isNullOrEmpty()) {
 
-                    drawImage(
-                        image = humanImage,
-                        dstOffset = IntOffset((size.width * squareWidth  *(xPos - 0.5)).roundToInt(), (size.width * squareWidth * (yPos - 0.5)).roundToInt()),
-                        dstSize = IntSize((size.width * squareWidth ).roundToInt(), (size.width * squareWidth).roundToInt()),
-                        style = Fill
-                    )
+                    val moshi = Moshi.Builder()
+                        .add(KotlinJsonAdapterFactory())
+                        .build()
+                    val jsonAdapter: JsonAdapter<TeamWithPlayers> = moshi.adapter(TeamWithPlayers::class.java)
+                    val teamWithPlayers = jsonAdapter.fromJson(teamWithPlayersStr)
+
+                    teamWithPlayers?.let {
+
+                        for (player in teamWithPlayers.players)
+                        {
+                            val position = player.position
+                            val numberedPos = Utils.fromOfficialPosToNumberedPos(position)
+                            val pos = numberedPos.split("_")
+                            val xPos = pos[0].toInt()
+                            val yPos = pos[1].toInt()
+
+                            drawImage(
+                                image = humanImage,
+                                dstOffset = IntOffset((size.width * squareWidth  *(xPos - 0.5)).roundToInt(), (size.width * squareWidth * (yPos - 0.5)).roundToInt()),
+                                dstSize = IntSize((size.width * squareWidth ).roundToInt(), (size.width * squareWidth).roundToInt()),
+                                style = Fill
+                            )
+                        }
+                    }
                 }
-
             }
 
+            /*
             suggestedOrcsTeam?.let { teamWithPlayers ->
 
                 for (player in teamWithPlayers.players)
@@ -191,6 +225,7 @@ fun CanvasDrawBoard(
                     )
                 }
             }
+            */
 /*
             drawPoints(
                 points = listOf(

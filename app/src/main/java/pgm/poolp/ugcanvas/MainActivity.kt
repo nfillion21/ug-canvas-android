@@ -90,6 +90,7 @@ fun BoardScreen(
         },
         backLayerContent = {
             CanvasDrawBoard(
+                viewModel = vm,
                 revealBackdropScaffold = {
                     if (scaffoldState.isConcealed) {
                         scope.launch {
@@ -110,7 +111,7 @@ fun BoardScreen(
                 //title = "Explore pictures of this character"
                 viewModel = vm,
                 launchGame = {
-                    //vm.setDataBoard()
+                    vm.setDataBoard(teamWithPlayers = it)
                 },
             )
         }
