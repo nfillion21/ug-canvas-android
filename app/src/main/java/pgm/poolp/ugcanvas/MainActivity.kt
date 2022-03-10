@@ -1,22 +1,21 @@
 package pgm.poolp.ugcanvas
 
 import android.os.Bundle
-import android.util.DisplayMetrics
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavBackStackEntry
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.launch
+import pgm.poolp.ugcanvas.data.Player
 import pgm.poolp.ugcanvas.data.TeamWithPlayers
 import pgm.poolp.ugcanvas.screens.CanvasDrawBoard
 import pgm.poolp.ugcanvas.screens.ExploreSection
@@ -95,11 +94,20 @@ fun BoardScreen(
                 //title = "Explore pictures of this character"
                 viewModel = vm,
                 launchGame = {
-                    //vm.setDataBoard(teamWithPlayers = it)
-                    scope.launch {
-                        //val value:String by vm.dataBoard().
-                    }
+                    vm.setDataBoard(teamWithPlayers = it)
                 },
+                toTheNorth = { playerId: String, teamWithPlayers: TeamWithPlayers ->
+                    val players = teamWithPlayers.players
+                    val player = players.find { it.playerId == playerId }
+                    if (player != null)
+                    {
+                        player.position = "A1"
+                        val newPlayers = players.toMutableList()
+                        newPlayers[newPlayers.indexOf(player)] = player
+                        teamWithPlayers.players = newPlayers.toList()
+                        vm.setDataBoard(teamWithPlayers = teamWithPlayers)
+                    }
+                }
             )
         }
     )

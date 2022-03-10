@@ -23,12 +23,13 @@ import pgm.poolp.ugcanvas.workers.TeamsDatabaseWorker.Companion.TEAMS_KEY_FILENA
  * This is the backend. The database. This used to be done by the OpenHelper.
  * The fact that this has very few comments emphasizes its coolness.
  */
-@Database(entities = [Player::class, Team::class, PlayerTeamCrossRef::class], version = 1, exportSchema = false)
+@Database(entities = [Player::class, Team::class, PlayerTeamCrossRef::class, Game::class], version = 1, exportSchema = false)
 abstract class UGCanvasRoomDatabase : RoomDatabase() {
 
     abstract fun playersDAO(): PlayersDAO
     abstract fun teamsDAO(): TeamDAO
     abstract fun playersTeamsCrossRefDAO(): PlayersTeamsCrossRefDAO
+    abstract fun gamesDAO(): GamesDAO
 
     companion object {
         @Volatile

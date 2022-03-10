@@ -6,10 +6,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import pgm.poolp.ugcanvas.data.PlayersDAO
-import pgm.poolp.ugcanvas.data.PlayersTeamsCrossRefDAO
-import pgm.poolp.ugcanvas.data.TeamDAO
-import pgm.poolp.ugcanvas.data.UGCanvasRoomDatabase
+import pgm.poolp.ugcanvas.data.*
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
@@ -35,5 +32,10 @@ class DatabaseModule {
     @Provides
     fun providePlayersTeamsDao(appDatabase: UGCanvasRoomDatabase): PlayersTeamsCrossRefDAO {
         return appDatabase.playersTeamsCrossRefDAO()
+    }
+
+    @Provides
+    fun provideGamesDao(appDatabase: UGCanvasRoomDatabase): GamesDAO {
+        return appDatabase.gamesDAO()
     }
 }
