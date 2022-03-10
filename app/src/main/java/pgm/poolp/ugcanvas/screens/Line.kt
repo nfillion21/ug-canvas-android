@@ -1,12 +1,15 @@
 package pgm.poolp.ugcanvas.screens
 
+import android.text.format.DateUtils
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.TweenSpec
+import androidx.compose.animation.core.animateFloatAsState
 import pgm.poolp.ugcanvas.R
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -14,13 +17,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.graphics.PointMode
 import androidx.compose.ui.graphics.drawscope.Fill
+import androidx.compose.ui.graphics.drawscope.translate
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.insets.statusBarsPadding
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
@@ -35,13 +39,14 @@ import kotlin.math.roundToInt
 @Composable
 fun CanvasDrawBoard(
     viewModel: TeamViewModel,
-    screenWidth:Float,
     modifier:Modifier,
     revealBackdropScaffold: () -> Unit,
 ) {
 
     val halfSquareWidth = 0.03125f // 1/32
     val squareWidth = 0.0625f // 1/16
+
+    val screenWidth = LocalConfiguration.current.screenWidthDp
     val screenHeight = screenWidth*1.8
 
     val humanImage = ImageBitmap.imageResource(id = R.drawable.outline_sports_martial_arts_black_48)
@@ -53,7 +58,7 @@ fun CanvasDrawBoard(
     val suggestedOrcsTeam by vm.teamWithPlayers("orcs").collectAsState(initial = null)
      */
 
-    val suggestedTeamWithPlayers by viewModel.teamWithPlayers().collectAsState(initial = null)
+    val suggestedTeamWithPlayers by viewModel.dataBoard().collectAsState(initial = null)
 
     /*
     teamWithPlayers?.let {
@@ -66,6 +71,7 @@ fun CanvasDrawBoard(
         }
     }
     */
+
 
     Column(modifier = modifier
         .fillMaxSize()
@@ -176,9 +182,7 @@ fun CanvasDrawBoard(
             )
 
             suggestedTeamWithPlayers?.let { teamWithPlayersStr ->
-
-                if (!teamWithPlayersStr.isNullOrEmpty()) {
-
+                teamWithPlayersStr.let {
                     val moshi = Moshi.Builder()
                         .add(KotlinJsonAdapterFactory())
                         .build()
@@ -187,8 +191,7 @@ fun CanvasDrawBoard(
 
                     teamWithPlayers?.let {
 
-                        for (player in teamWithPlayers.players)
-                        {
+                        for (player in teamWithPlayers.players) {
                             val position = player.position
                             val numberedPos = Utils.fromOfficialPosToNumberedPos(position)
                             val pos = numberedPos.split("_")

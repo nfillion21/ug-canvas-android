@@ -22,7 +22,7 @@ class UGCanvasRepository @Inject constructor () {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val value = dataSnapshot.getValue<String>()
                 if (value == null) {
-                    trySend("")
+                    trySend(null)
                 }
                 else {
                     //dataBoard = value
@@ -31,7 +31,7 @@ class UGCanvasRepository @Inject constructor () {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                trySend("")
+                trySend(null)
             }
         })
 

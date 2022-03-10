@@ -19,11 +19,11 @@ class TeamViewModel @Inject internal constructor(private val teamRepository: Tea
     //val skill = skillRepository.getSkill(skillId).asLiveData()
     //val skillWithChampions = skillRepository.getSkillWithChampions(skillId).asLiveData()
 
-    fun teamWithPlayers(teamId:String): Flow<TeamWithPlayers> {
+    fun dataBoard(teamId:String): Flow<TeamWithPlayers> {
         return teamRepository.getTeamWithPlayers(teamId)//.asLiveData()
     }
 
-    fun teamWithPlayers(): Flow<String> {
+    fun dataBoard(): Flow<String?> {
         return canvasRepository.getDataBoard()
     }
 

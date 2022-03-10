@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.util.DisplayMetrics
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -12,14 +11,16 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.launch
-import pgm.poolp.ugcanvas.theme.UGCanvasTheme
+import pgm.poolp.ugcanvas.data.TeamWithPlayers
 import pgm.poolp.ugcanvas.screens.CanvasDrawBoard
 import pgm.poolp.ugcanvas.screens.ExploreSection
+import pgm.poolp.ugcanvas.theme.UGCanvasTheme
 import pgm.poolp.ugcanvas.viewmodels.TeamViewModel
 
 @AndroidEntryPoint
@@ -27,20 +28,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val displayMetrics: DisplayMetrics = resources.displayMetrics
-        val dpWidth = displayMetrics.widthPixels / displayMetrics.density
-        val dpHeight = displayMetrics.heightPixels / displayMetrics.density
-
-        /*
-        val icon: Bitmap = BitmapFactory.decodeResource(
-            resources,
-            R.drawable.ic_launcher_background
-        )
-        */
-
-
         setContent {
-            //ProvideWindowInsets {
             UGCanvasTheme {
                 Scaffold(
                     drawerContent = {
@@ -58,10 +46,9 @@ class MainActivity : ComponentActivity() {
                     }
 
                 ) { innerPaddingModifier ->
-                    BoardScreen(dpWidth, dpHeight, Modifier.padding(innerPaddingModifier))
+                    BoardScreen(Modifier.padding(innerPaddingModifier))
                 }
             }
-            //}
         }
     }
 }
@@ -69,8 +56,6 @@ class MainActivity : ComponentActivity() {
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun BoardScreen(
-    screenWidth: Float,
-    screenHeight:Float,
     modifier:Modifier) {
     //Text(text = "Hello $name!")
 
@@ -84,7 +69,7 @@ fun BoardScreen(
         scaffoldState = scaffoldState,
         stickyFrontLayer = false,
         headerHeight = 64.dp,
-        peekHeight = (screenHeight * 0.5f).dp,
+        peekHeight = (LocalConfiguration.current.screenHeightDp * 0.5f).dp,
         appBar = {
             //HomeTabBar(openDrawer, tabSelected, onTabSelected = { tabSelected = it })
         },
@@ -102,7 +87,6 @@ fun BoardScreen(
                         }
                     }
                 },
-                screenWidth = screenWidth,
                 modifier = modifier
             )
         },
@@ -111,7 +95,10 @@ fun BoardScreen(
                 //title = "Explore pictures of this character"
                 viewModel = vm,
                 launchGame = {
-                    vm.setDataBoard(teamWithPlayers = it)
+                    //vm.setDataBoard(teamWithPlayers = it)
+                    scope.launch {
+                        //val value:String by vm.dataBoard().
+                    }
                 },
             )
         }
