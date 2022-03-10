@@ -80,38 +80,41 @@ object Utils {
         return null
     }
 
-    fun getPosFromCardinalPoint(pos: String, cardinalEnum: CardinalEnum?): String? {
-        val positions = pos.split("_".toRegex()).toTypedArray()
+    fun getOfficialPosFromCardinalPoint(officialPos: String, cardinalEnum: CardinalEnum): String {
+
+        val numberedPos = fromOfficialPosToNumberedPos(officialPos)
+
+        val positions = numberedPos.split("_".toRegex()).toTypedArray()
         var i = positions[0].toInt()
         var j = positions[1].toInt()
-        when (cardinalEnum) {
+
+        val newNumberedPost = when (cardinalEnum) {
             CardinalEnum.NORTH -> {
-                return (--i).toString() + "_" + j.toString()
+                i.toString() + "_" + (--j).toString()
             }
             CardinalEnum.NORTH_EAST -> {
-                return (--i).toString() + "_" + (++j).toString()
+                (++i).toString() + "_" + (--j).toString()
             }
             CardinalEnum.EAST -> {
-                return i.toString() + "_" + (++j).toString()
+                (++i).toString() + "_" + j.toString()
             }
             CardinalEnum.SOUTH_EAST -> {
-                return (++i).toString() + "_" + (++j).toString()
+                (++i).toString() + "_" + (++j).toString()
             }
             CardinalEnum.SOUTH -> {
-                return (++i).toString() + "_" + j.toString()
+                i.toString() + "_" + (++j).toString()
             }
             CardinalEnum.SOUTH_WEST -> {
-                return (++i).toString() + "_" + (--j).toString()
+                (--i).toString() + "_" + (++j).toString()
             }
             CardinalEnum.WEST -> {
-                return i.toString() + "_" + (--j).toString()
+                (--i).toString() + "_" + j.toString()
             }
             CardinalEnum.NORTH_WEST -> {
-                return (--i).toString() + "_" + (--j).toString()
+                (--i).toString() + "_" + (--j).toString()
             }
-            else -> {}
         }
-        return null
+        return fromNumberedPosToOfficialPos(newNumberedPost)
     }
 
     fun getPushedAwayPositions(cardinalEnum: CardinalEnum?): Array<CardinalEnum?>? {
