@@ -36,6 +36,7 @@ import pgm.poolp.ugcanvas.data.ExpandableCardModel
 import pgm.poolp.ugcanvas.data.Player
 import pgm.poolp.ugcanvas.data.TeamWithPlayers
 import pgm.poolp.ugcanvas.theme.BottomSheetShape
+import pgm.poolp.ugcanvas.theme.Green300
 import pgm.poolp.ugcanvas.theme.cardCollapsedBackgroundColor
 import pgm.poolp.ugcanvas.theme.cardExpandedBackgroundColor
 import pgm.poolp.ugcanvas.utilities.*
@@ -49,7 +50,7 @@ fun ExploreSection(
     viewModel: TeamViewModel,
     cardsViewModel: CardsViewModel,
     launchGame: (TeamWithPlayers) -> Unit,
-    toTheNorth: (String, TeamWithPlayers) -> Unit
+    playerTo: (String, Utils.CardinalEnum, TeamWithPlayers) -> Unit
 ) {
 
     val suggestedTeamWithPlayers by viewModel.dataBoard("humans").collectAsState(initial = null)
@@ -84,9 +85,13 @@ fun ExploreSection(
 
                         itemsIndexed(teamWithPlayers.players) { _, player ->
                             ExpandableCard(
-                                card = ExpandableCardModel(id = player.playerId, title = player.name + " " + player.position),
+                                player = player,
                                 onCardArrowClick = { cardsViewModel.onCardArrowClicked(player.playerId) },
                                 expanded = expandedCardIds.value.contains(player.playerId),
+                                onDirectionClick = { p:Player, direction:Utils.CardinalEnum ->
+
+                                    playerTo (p.playerId, direction, teamWithPlayers)
+                                }
                             )
                         }
                     }
@@ -124,8 +129,9 @@ fun ExploreSection(
 @SuppressLint("UnusedTransitionTargetStateParameter")
 @Composable
 fun ExpandableCard(
-    card: ExpandableCardModel,
+    player: Player,
     onCardArrowClick: () -> Unit,
+    onDirectionClick: (Player, Utils.CardinalEnum) -> Unit,
     expanded: Boolean,
 ) {
     val transitionState = remember {
@@ -137,12 +143,12 @@ fun ExpandableCard(
     val cardBgColor by transition.animateColor({
         tween(durationMillis = EXPAND_ANIMATION_DURATION)
     }, label = "bgColorTransition") {
-        if (expanded) cardExpandedBackgroundColor else cardCollapsedBackgroundColor
+        if (expanded) cardCollapsedBackgroundColor else cardCollapsedBackgroundColor
     }
     val cardPaddingHorizontal by transition.animateDp({
         tween(durationMillis = EXPAND_ANIMATION_DURATION)
     }, label = "paddingTransition") {
-        if (expanded) 48.dp else 24.dp
+        if (expanded) 14.dp else 4.dp
     }
     val cardElevation by transition.animateDp({
         tween(durationMillis = EXPAND_ANIMATION_DURATION)
@@ -165,12 +171,6 @@ fun ExpandableCard(
 
     Card(
         backgroundColor = cardBgColor,
-        contentColor = Color(
-            ContextCompat.getColor(
-                LocalContext.current,
-                R.color.colorDayNightPurple
-            )
-        ),
         elevation = cardElevation,
         shape = RoundedCornerShape(cardRoundedCorners),
         modifier = Modifier
@@ -186,9 +186,14 @@ fun ExpandableCard(
                     degrees = arrowRotationDegree,
                     onClick = onCardArrowClick
                 )
-                CardTitle(title = card.title)
+                CardTitle(title = player.name)
             }
-            ExpandableContent(visible = expanded)
+            ExpandableContent(
+                visible = expanded,
+                onDirectionClick = { cardinalDirection: Utils.CardinalEnum ->
+                    onDirectionClick (player, cardinalDirection)
+                }
+            )
         }
     }
 }
@@ -225,6 +230,7 @@ fun CardTitle(title: String) {
 @Composable
 fun ExpandableContent(
     visible: Boolean = true,
+    onDirectionClick: (Utils.CardinalEnum) -> Unit
 ) {
     val enterFadeIn = remember {
         fadeIn(
@@ -259,6 +265,9 @@ fun ExpandableContent(
                 text = "Expandable content here",
                 textAlign = TextAlign.Center
             )
+            Button(onClick = { onDirectionClick(Utils.CardinalEnum.NORTH_EAST)}) {
+
+            }
         }
     }
 }

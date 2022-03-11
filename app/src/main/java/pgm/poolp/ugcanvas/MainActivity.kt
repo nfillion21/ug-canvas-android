@@ -98,12 +98,12 @@ fun BoardScreen(
                 launchGame = {
                     vm.setDataBoard(teamWithPlayers = it)
                 },
-                toTheNorth = { playerId: String, teamWithPlayers: TeamWithPlayers ->
+                playerTo = { playerId: String, direction: Utils.CardinalEnum, teamWithPlayers: TeamWithPlayers ->
                     val players = teamWithPlayers.players
                     val player = players.find { it.playerId == playerId }
                     if (player != null)
                     {
-                        player.position = Utils.getOfficialPosFromCardinalPoint(player.position, Utils.CardinalEnum.NORTH)
+                        player.position = Utils.getOfficialPosFromCardinalPoint(player.position, direction)
                         val newPlayers = players.toMutableList()
                         newPlayers[newPlayers.indexOf(player)] = player
                         teamWithPlayers.players = newPlayers.toList()
