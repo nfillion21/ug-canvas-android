@@ -13,3 +13,5 @@ val Green900 = Color(0xFF1A231E)
 
 val Yellow300 = Color(0xFFF8F99F)
 val Yellow500 = Color(0xFFFFFF63)
+val cardCollapsedBackgroundColor = Color(0xFFFEFFFD)
+val cardExpandedBackgroundColor = Color(0xFFFFDA6D)

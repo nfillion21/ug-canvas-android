@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.PointMode
 import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.platform.LocalConfiguration
@@ -47,7 +48,7 @@ fun CanvasDrawBoard(
     val squareWidth = 0.0625f // 1/16
 
     val screenWidth = LocalConfiguration.current.screenWidthDp
-    val screenHeight = screenWidth*1.8
+    val screenHeight = screenWidth*1.75
 
     val humanImage = ImageBitmap.imageResource(id = R.drawable.outline_sports_martial_arts_black_48)
     val orcImage = ImageBitmap.imageResource(id = R.drawable.outline_directions_run_black_48)
@@ -229,7 +230,7 @@ fun CanvasDrawBoard(
                 }
             }
             */
-/*
+            /*
             drawPoints(
                 points = listOf(
                     // 1st line

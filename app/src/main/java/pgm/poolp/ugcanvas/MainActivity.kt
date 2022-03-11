@@ -94,6 +94,7 @@ fun BoardScreen(
             ExploreSection(
                 //title = "Explore pictures of this character"
                 viewModel = vm,
+                cardsViewModel = hiltViewModel(),
                 launchGame = {
                     vm.setDataBoard(teamWithPlayers = it)
                 },
@@ -102,7 +103,7 @@ fun BoardScreen(
                     val player = players.find { it.playerId == playerId }
                     if (player != null)
                     {
-                        player.position = "A1"
+                        player.position = Utils.getOfficialPosFromCardinalPoint(player.position, Utils.CardinalEnum.NORTH)
                         val newPlayers = players.toMutableList()
                         newPlayers[newPlayers.indexOf(player)] = player
                         teamWithPlayers.players = newPlayers.toList()
