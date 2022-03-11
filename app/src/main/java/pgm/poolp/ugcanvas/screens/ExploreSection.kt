@@ -3,46 +3,39 @@ package pgm.poolp.ugcanvas.screens
 import android.annotation.SuppressLint
 import androidx.compose.animation.*
 import androidx.compose.animation.core.*
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Face
+import androidx.compose.material3.ElevatedButton
+import androidx.compose.material3.FilledTonalButton
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.drawscope.Fill
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.semantics.Role.Companion.Button
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.IntOffset
-import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
-import androidx.core.content.ContextCompat
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import pgm.poolp.ugcanvas.R
-import pgm.poolp.ugcanvas.data.ExpandableCardModel
 import pgm.poolp.ugcanvas.data.Player
 import pgm.poolp.ugcanvas.data.TeamWithPlayers
-import pgm.poolp.ugcanvas.theme.BottomSheetShape
-import pgm.poolp.ugcanvas.theme.Green300
-import pgm.poolp.ugcanvas.theme.cardCollapsedBackgroundColor
-import pgm.poolp.ugcanvas.theme.cardExpandedBackgroundColor
+import pgm.poolp.ugcanvas.theme.*
 import pgm.poolp.ugcanvas.utilities.*
 import pgm.poolp.ugcanvas.viewmodels.CardsViewModel
 import pgm.poolp.ugcanvas.viewmodels.TeamViewModel
-import kotlin.math.roundToInt
 
 @Composable
 fun ExploreSection(
@@ -72,16 +65,6 @@ fun ExploreSection(
                     val teamWithPlayers = jsonAdapter.fromJson(teamWithPlayersStr)
 
                     teamWithPlayers?.let {
-
-                        /*
-                        items(teamWithPlayers.players) { player ->
-                            Text(
-                                text = player.name + " " + player.position,
-                                style = MaterialTheme.typography.h5,
-                                modifier = Modifier.clickable { toTheNorth(player.playerId, teamWithPlayers) }
-                            )
-                        }
-                        */
 
                         itemsIndexed(teamWithPlayers.players) { _, player ->
                             ExpandableCard(
@@ -143,7 +126,7 @@ fun ExpandableCard(
     val cardBgColor by transition.animateColor({
         tween(durationMillis = EXPAND_ANIMATION_DURATION)
     }, label = "bgColorTransition") {
-        if (expanded) cardCollapsedBackgroundColor else cardCollapsedBackgroundColor
+        if (expanded) Color.White else cardCollapsedBackgroundColor
     }
     val cardPaddingHorizontal by transition.animateDp({
         tween(durationMillis = EXPAND_ANIMATION_DURATION)
@@ -259,14 +242,58 @@ fun ExpandableContent(
         enter = enterExpand + enterFadeIn,
         exit = exitCollapse + exitFadeOut
     ) {
-        Column(modifier = Modifier.padding(8.dp)) {
-            Spacer(modifier = Modifier.heightIn(100.dp))
-            Text(
-                text = "Expandable content here",
-                textAlign = TextAlign.Center
-            )
-            Button(onClick = { onDirectionClick(Utils.CardinalEnum.NORTH_EAST)}) {
+        Column(
 
+            modifier = Modifier
+                .padding(8.dp)
+                .fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+
+        ) {
+            Row(
+            ) {
+
+                OutlinedButton(
+                    onClick = { onDirectionClick(Utils.CardinalEnum.NORTH_WEST)})
+                {
+                    Text("NW")
+                }
+                OutlinedButton(
+                    onClick = { onDirectionClick(Utils.CardinalEnum.NORTH)}
+                ) {
+                    Text("N")
+                }
+                OutlinedButton(onClick = { onDirectionClick(Utils.CardinalEnum.NORTH_EAST)}) {
+                    Text("NE")
+                }
+            }
+            Row() {
+
+                OutlinedButton(
+                    onClick = { onDirectionClick(Utils.CardinalEnum.WEST)}) {
+                    Text(text = "W")
+                }
+                OutlinedButton(
+                    modifier = Modifier.alpha(0f),
+                    enabled = false,
+                    onClick = { onDirectionClick(Utils.CardinalEnum.NORTH_EAST)}) {
+                    Text(text = "N")
+                }
+                OutlinedButton(onClick = { onDirectionClick(Utils.CardinalEnum.EAST)}) {
+                    Text(text = "E")
+                }
+            }
+            Row() {
+
+                OutlinedButton(onClick = { onDirectionClick(Utils.CardinalEnum.SOUTH_WEST)}) {
+                    Text(text = "SW")
+                }
+                OutlinedButton(onClick = { onDirectionClick(Utils.CardinalEnum.SOUTH)}) {
+                    Text(text = "S")
+                }
+                OutlinedButton(onClick = { onDirectionClick(Utils.CardinalEnum.SOUTH_EAST)}) {
+                    Text(text = "SE")
+                }
             }
         }
     }

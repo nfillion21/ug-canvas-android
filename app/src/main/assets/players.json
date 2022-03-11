@@ -6,18 +6,18 @@
   },
   {
     "playerId": "human_02",
-    "name": "Human 01",
+    "name": "Human 02",
     "position": "B6"
   },
   {
     "playerId": "human_03",
-    "name": "Human 01",
+    "name": "Human 03",
     "position": "C8"
   },
   {
     "playerId": "human_04",
-    "name": "Human 01",
-    "position": "E18"
+    "name": "Human 04",
+    "position": "E8"
   },
   {
     "playerId": "orc_01",

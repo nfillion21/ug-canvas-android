@@ -49,4 +49,8 @@ object Dependencies {
     val firebasePlatform by lazy {"com.google.firebase:firebase-bom:${Versions.firebaseVersion}"}
     val firebaseAnalytics by lazy {"com.google.firebase:firebase-analytics-ktx"}
     val firebaseDatabase by lazy {"com.google.firebase:firebase-database-ktx"}
+
+    val moshi by lazy {"com.squareup.moshi:moshi-kotlin:${Versions.moshiVersion}"}
+
+    val material3 by lazy {"androidx.compose.material3:material3:${Versions.material3Version}"}
 }

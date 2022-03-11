@@ -27,4 +27,6 @@ object Versions {
     const val appCompat = "1.4.1"
 
     const val firebaseVersion = "29.1.0"
+    const val moshiVersion = "1.13.0"
+    const val material3Version = "1.0.0-alpha07"
 }

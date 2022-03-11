@@ -3,11 +3,13 @@ package pgm.poolp.ugcanvas
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -93,6 +95,7 @@ fun BoardScreen(
         frontLayerContent = {
             ExploreSection(
                 //title = "Explore pictures of this character"
+                modifier = Modifier.background(Color.Gray),
                 viewModel = vm,
                 cardsViewModel = hiltViewModel(),
                 launchGame = {
