@@ -186,23 +186,6 @@ object Utils {
     }
     */
 
-    fun prompt(msg: String?): String? {
-        var input: String? = null
-        try {
-            val bufferedReader = BufferedReader(InputStreamReader(System.`in`))
-            input = bufferedReader.readLine()
-
-            //System.out.println(input);
-
-            //while (System.in.read() != '\n');
-            return input
-        } catch (ex: NumberFormatException) {
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
-        return input
-    }
-
     private fun fromCharToInt(number:Char): Int {
         return  when (number) {
             'A' -> 1
@@ -248,16 +231,18 @@ object Utils {
     fun fromOfficialPosToNumberedPos(officialPos:String): String {
 
         val xChar = officialPos[0]
-        val yNumber = officialPos.subSequence(1, officialPos.length)
+        val yNumber = officialPos.subSequence(1, officialPos.length).toString().toInt()
 
-        return fromCharToInt(xChar).toString() + "_" + yNumber.toString()
+        val intValue = 15 - yNumber + 1
+
+        return fromCharToInt(xChar).toString() + "_" + intValue.toString()
     }
 
     private fun fromNumberedPosToOfficialPos(realPos:String): String {
 
         val positions = realPos.split("_".toRegex()).toTypedArray()
         val i = positions[0].toInt()
-        val j = positions[1]
+        val j = 15 - positions[1].toInt() + 1
 
         return fromIntToChar(i).toString() + j
     }
@@ -298,7 +283,7 @@ object Utils {
         //val min = 1
         //val max = 6
         //return rand.nextInt(max - min + 1) + min
-        return (0..6).random()
+        return (1..6).random()
 
         //return min + (int)(Math.random() * ((max-min) + 1) );
     }

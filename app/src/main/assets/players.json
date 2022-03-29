@@ -2,22 +2,22 @@
   {
     "playerId": "human_01",
     "name": "Human 01",
-    "position": "B4"
+    "position": "A15"
   },
   {
     "playerId": "human_02",
     "name": "Human 02",
-    "position": "B6"
+    "position": "B15"
   },
   {
     "playerId": "human_03",
     "name": "Human 03",
-    "position": "C8"
+    "position": "A14"
   },
   {
     "playerId": "human_04",
     "name": "Human 04",
-    "position": "E8"
+    "position": "B14"
   },
   {
     "playerId": "orc_01",

@@ -44,11 +44,14 @@ fun CanvasDrawBoard(
     revealBackdropScaffold: () -> Unit,
 ) {
 
-    val halfSquareWidth = 0.03125f // 1/32
-    val squareWidth = 0.0625f // 1/16
+    //val halfSquareWidth = 0.03125f // 1/32
+    //val squareWidth = 0.0625f // 1/16
+
+    val halfSquareWidth = 1f/24f
+    val squareWidth = 1f/12f
 
     val screenWidth = LocalConfiguration.current.screenWidthDp
-    val screenHeight = screenWidth*1.75
+    val screenHeight = screenWidth*1.36
 
     val humanImage = ImageBitmap.imageResource(id = R.drawable.outline_sports_martial_arts_black_48)
     val orcImage = ImageBitmap.imageResource(id = R.drawable.outline_directions_run_black_48)
@@ -100,6 +103,7 @@ fun CanvasDrawBoard(
                 strokeWidth = size.width * 0.010f,
             )
 
+
             // second horizontal line
             drawLine(
                 Color.White,
@@ -115,7 +119,7 @@ fun CanvasDrawBoard(
             drawLine(
                 Color.White,
                 start = Offset(size.width * squareWidth * 0.5f, size.width * halfSquareWidth),
-                end = Offset(size.width * squareWidth * 0.5f, size.width * squareWidth * 26.5f),
+                end = Offset(size.width * squareWidth * 0.5f, size.width * squareWidth * 15.5f),
                 strokeWidth = size.width * 0.010f,
             )
 
@@ -128,34 +132,18 @@ fun CanvasDrawBoard(
                 ),
                 end = Offset(
                     size.width - size.width * halfSquareWidth,
-                    size.width * squareWidth * 26.5f
+                    size.width * squareWidth * 15.5f
                 ),
-                strokeWidth = size.width * 0.010f,
-            )
-
-            // third vertical line
-            drawLine(
-                Color.White,
-                start = Offset(size.width * squareWidth * 4.5f, size.width * squareWidth * 1.5f),
-                end = Offset(size.width * squareWidth * 4.5f, size.width * squareWidth * 25.5f),
-                strokeWidth = size.width * 0.010f,
-            )
-
-            // fourth vertical line
-            drawLine(
-                Color.White,
-                start = Offset(size.width * squareWidth * 11.5f, size.width * squareWidth * 1.5f),
-                end = Offset(size.width * squareWidth * 11.5f, size.width * squareWidth * 25.5f),
                 strokeWidth = size.width * 0.010f,
             )
 
             // bottom horizontal line
             drawLine(
                 Color.White,
-                start = Offset(size.width * halfSquareWidth, size.width * squareWidth * 26.5f),
+                start = Offset(size.width * halfSquareWidth, size.width * squareWidth * 15.5f),
                 end = Offset(
                     size.width - size.width * halfSquareWidth,
-                    size.width * squareWidth * 26.5f
+                    size.width * squareWidth * 15.5f
                 ),
                 strokeWidth = size.width * 0.010f,
             )
@@ -163,21 +151,10 @@ fun CanvasDrawBoard(
             // line above
             drawLine(
                 Color.White,
-                start = Offset(size.width * halfSquareWidth, size.width * squareWidth * 25.5f),
+                start = Offset(size.width * halfSquareWidth, size.width * squareWidth * 14.5f),
                 end = Offset(
                     size.width - size.width * halfSquareWidth,
-                    size.width * squareWidth * 25.5f
-                ),
-                strokeWidth = size.width * 0.010f,
-            )
-
-            // center line
-            drawLine(
-                Color.White,
-                start = Offset(size.width * halfSquareWidth, size.width * squareWidth * 13.5f),
-                end = Offset(
-                    size.width - size.width * halfSquareWidth,
-                    size.width * squareWidth * 13.5f
+                    size.width * squareWidth * 14.5f
                 ),
                 strokeWidth = size.width * 0.010f,
             )
@@ -230,7 +207,6 @@ fun CanvasDrawBoard(
                 }
             }
             */
-            /*
             drawPoints(
                 points = listOf(
                     // 1st line
@@ -246,10 +222,6 @@ fun CanvasDrawBoard(
                     Offset(size.width * squareWidth * 9.5f, size.width * halfSquareWidth),
                     Offset(size.width * squareWidth * 10.5f, size.width * halfSquareWidth),
                     Offset(size.width * squareWidth * 11.5f, size.width * halfSquareWidth),
-                    Offset(size.width * squareWidth * 12.5f, size.width * halfSquareWidth),
-                    Offset(size.width * squareWidth * 13.5f, size.width * halfSquareWidth),
-                    Offset(size.width * squareWidth * 14.5f, size.width * halfSquareWidth),
-                    Offset(size.width * squareWidth * 15.5f, size.width * halfSquareWidth),
 
                     // 2nd line
                     Offset(size.width * squareWidth * 0.5f, size.width * squareWidth * 1.5f),
@@ -264,10 +236,6 @@ fun CanvasDrawBoard(
                     Offset(size.width * squareWidth * 9.5f, size.width * squareWidth * 1.5f),
                     Offset(size.width * squareWidth * 10.5f, size.width * squareWidth * 1.5f),
                     Offset(size.width * squareWidth * 11.5f, size.width * squareWidth * 1.5f),
-                    Offset(size.width * squareWidth * 12.5f, size.width * squareWidth * 1.5f),
-                    Offset(size.width * squareWidth * 13.5f, size.width * squareWidth * 1.5f),
-                    Offset(size.width * squareWidth * 14.5f, size.width * squareWidth * 1.5f),
-                    Offset(size.width * squareWidth * 15.5f, size.width * squareWidth * 1.5f),
 
                     // 3rd line
                     Offset(size.width * squareWidth * 0.5f, size.width * squareWidth * 2.5f),
@@ -282,10 +250,6 @@ fun CanvasDrawBoard(
                     Offset(size.width * squareWidth * 9.5f, size.width * squareWidth * 2.5f),
                     Offset(size.width * squareWidth * 10.5f, size.width * squareWidth * 2.5f),
                     Offset(size.width * squareWidth * 11.5f, size.width * squareWidth * 2.5f),
-                    Offset(size.width * squareWidth * 12.5f, size.width * squareWidth * 2.5f),
-                    Offset(size.width * squareWidth * 13.5f, size.width * squareWidth * 2.5f),
-                    Offset(size.width * squareWidth * 14.5f, size.width * squareWidth * 2.5f),
-                    Offset(size.width * squareWidth * 15.5f, size.width * squareWidth * 2.5f),
 
                     // 4th line
                     Offset(size.width * squareWidth * 0.5f, size.width * squareWidth * 3.5f),
@@ -300,10 +264,6 @@ fun CanvasDrawBoard(
                     Offset(size.width * squareWidth * 9.5f, size.width * squareWidth * 3.5f),
                     Offset(size.width * squareWidth * 10.5f, size.width * squareWidth * 3.5f),
                     Offset(size.width * squareWidth * 11.5f, size.width * squareWidth * 3.5f),
-                    Offset(size.width * squareWidth * 12.5f, size.width * squareWidth * 3.5f),
-                    Offset(size.width * squareWidth * 13.5f, size.width * squareWidth * 3.5f),
-                    Offset(size.width * squareWidth * 14.5f, size.width * squareWidth * 3.5f),
-                    Offset(size.width * squareWidth * 15.5f, size.width * squareWidth * 3.5f),
 
                     // 5th line
                     Offset(size.width * squareWidth * 0.5f, size.width * squareWidth * 4.5f),
@@ -318,10 +278,6 @@ fun CanvasDrawBoard(
                     Offset(size.width * squareWidth * 9.5f, size.width * squareWidth * 4.5f),
                     Offset(size.width * squareWidth * 10.5f, size.width * squareWidth * 4.5f),
                     Offset(size.width * squareWidth * 11.5f, size.width * squareWidth * 4.5f),
-                    Offset(size.width * squareWidth * 12.5f, size.width * squareWidth * 4.5f),
-                    Offset(size.width * squareWidth * 13.5f, size.width * squareWidth * 4.5f),
-                    Offset(size.width * squareWidth * 14.5f, size.width * squareWidth * 4.5f),
-                    Offset(size.width * squareWidth * 15.5f, size.width * squareWidth * 4.5f),
 
                     // 6th line
                     Offset(size.width * squareWidth * 0.5f, size.width * squareWidth * 5.5f),
@@ -336,10 +292,6 @@ fun CanvasDrawBoard(
                     Offset(size.width * squareWidth * 9.5f, size.width * squareWidth * 5.5f),
                     Offset(size.width * squareWidth * 10.5f, size.width * squareWidth * 5.5f),
                     Offset(size.width * squareWidth * 11.5f, size.width * squareWidth * 5.5f),
-                    Offset(size.width * squareWidth * 12.5f, size.width * squareWidth * 5.5f),
-                    Offset(size.width * squareWidth * 13.5f, size.width * squareWidth * 5.5f),
-                    Offset(size.width * squareWidth * 14.5f, size.width * squareWidth * 5.5f),
-                    Offset(size.width * squareWidth * 15.5f, size.width * squareWidth * 5.5f),
 
                     // 7th line
                     Offset(size.width * squareWidth * 0.5f, size.width * squareWidth * 6.5f),
@@ -354,10 +306,6 @@ fun CanvasDrawBoard(
                     Offset(size.width * squareWidth * 9.5f, size.width * squareWidth * 6.5f),
                     Offset(size.width * squareWidth * 10.5f, size.width * squareWidth * 6.5f),
                     Offset(size.width * squareWidth * 11.5f, size.width * squareWidth * 6.5f),
-                    Offset(size.width * squareWidth * 12.5f, size.width * squareWidth * 6.5f),
-                    Offset(size.width * squareWidth * 13.5f, size.width * squareWidth * 6.5f),
-                    Offset(size.width * squareWidth * 14.5f, size.width * squareWidth * 6.5f),
-                    Offset(size.width * squareWidth * 15.5f, size.width * squareWidth * 6.5f),
 
                     // 8th line
                     Offset(size.width * squareWidth * 0.5f, size.width * squareWidth * 7.5f),
@@ -372,10 +320,6 @@ fun CanvasDrawBoard(
                     Offset(size.width * squareWidth * 9.5f, size.width * squareWidth * 7.5f),
                     Offset(size.width * squareWidth * 10.5f, size.width * squareWidth * 7.5f),
                     Offset(size.width * squareWidth * 11.5f, size.width * squareWidth * 7.5f),
-                    Offset(size.width * squareWidth * 12.5f, size.width * squareWidth * 7.5f),
-                    Offset(size.width * squareWidth * 13.5f, size.width * squareWidth * 7.5f),
-                    Offset(size.width * squareWidth * 14.5f, size.width * squareWidth * 7.5f),
-                    Offset(size.width * squareWidth * 15.5f, size.width * squareWidth * 7.5f),
 
                     // 9th line
                     Offset(size.width * squareWidth * 0.5f, size.width * squareWidth * 8.5f),
@@ -390,10 +334,6 @@ fun CanvasDrawBoard(
                     Offset(size.width * squareWidth * 9.5f, size.width * squareWidth * 8.5f),
                     Offset(size.width * squareWidth * 10.5f, size.width * squareWidth * 8.5f),
                     Offset(size.width * squareWidth * 11.5f, size.width * squareWidth * 8.5f),
-                    Offset(size.width * squareWidth * 12.5f, size.width * squareWidth * 8.5f),
-                    Offset(size.width * squareWidth * 13.5f, size.width * squareWidth * 8.5f),
-                    Offset(size.width * squareWidth * 14.5f, size.width * squareWidth * 8.5f),
-                    Offset(size.width * squareWidth * 15.5f, size.width * squareWidth * 8.5f),
 
 
                     // 10th line
@@ -409,10 +349,6 @@ fun CanvasDrawBoard(
                     Offset(size.width * squareWidth * 9.5f, size.width * squareWidth * 9.5f),
                     Offset(size.width * squareWidth * 10.5f, size.width * squareWidth * 9.5f),
                     Offset(size.width * squareWidth * 11.5f, size.width * squareWidth * 9.5f),
-                    Offset(size.width * squareWidth * 12.5f, size.width * squareWidth * 9.5f),
-                    Offset(size.width * squareWidth * 13.5f, size.width * squareWidth * 9.5f),
-                    Offset(size.width * squareWidth * 14.5f, size.width * squareWidth * 9.5f),
-                    Offset(size.width * squareWidth * 15.5f, size.width * squareWidth * 9.5f),
 
                     // 11th line
                     Offset(size.width * squareWidth * 0.5f, size.width * squareWidth * 10.5f),
@@ -427,10 +363,6 @@ fun CanvasDrawBoard(
                     Offset(size.width * squareWidth * 9.5f, size.width * squareWidth * 10.5f),
                     Offset(size.width * squareWidth * 10.5f, size.width * squareWidth * 10.5f),
                     Offset(size.width * squareWidth * 11.5f, size.width * squareWidth * 10.5f),
-                    Offset(size.width * squareWidth * 12.5f, size.width * squareWidth * 10.5f),
-                    Offset(size.width * squareWidth * 13.5f, size.width * squareWidth * 10.5f),
-                    Offset(size.width * squareWidth * 14.5f, size.width * squareWidth * 10.5f),
-                    Offset(size.width * squareWidth * 15.5f, size.width * squareWidth * 10.5f),
 
                     // 12h line
                     Offset(size.width * squareWidth * 0.5f, size.width * squareWidth * 11.5f),
@@ -445,10 +377,6 @@ fun CanvasDrawBoard(
                     Offset(size.width * squareWidth * 9.5f, size.width * squareWidth * 11.5f),
                     Offset(size.width * squareWidth * 10.5f, size.width * squareWidth * 11.5f),
                     Offset(size.width * squareWidth * 11.5f, size.width * squareWidth * 11.5f),
-                    Offset(size.width * squareWidth * 12.5f, size.width * squareWidth * 11.5f),
-                    Offset(size.width * squareWidth * 13.5f, size.width * squareWidth * 11.5f),
-                    Offset(size.width * squareWidth * 14.5f, size.width * squareWidth * 11.5f),
-                    Offset(size.width * squareWidth * 15.5f, size.width * squareWidth * 11.5f),
 
                     // 13th line
                     Offset(size.width * squareWidth * 0.5f, size.width * squareWidth * 12.5f),
@@ -463,10 +391,6 @@ fun CanvasDrawBoard(
                     Offset(size.width * squareWidth * 9.5f, size.width * squareWidth * 12.5f),
                     Offset(size.width * squareWidth * 10.5f, size.width * squareWidth * 12.5f),
                     Offset(size.width * squareWidth * 11.5f, size.width * squareWidth * 12.5f),
-                    Offset(size.width * squareWidth * 12.5f, size.width * squareWidth * 12.5f),
-                    Offset(size.width * squareWidth * 13.5f, size.width * squareWidth * 12.5f),
-                    Offset(size.width * squareWidth * 14.5f, size.width * squareWidth * 12.5f),
-                    Offset(size.width * squareWidth * 15.5f, size.width * squareWidth * 12.5f),
 
                     // 14th line
                     Offset(size.width * squareWidth * 0.5f, size.width * squareWidth * 13.5f),
@@ -481,10 +405,6 @@ fun CanvasDrawBoard(
                     Offset(size.width * squareWidth * 9.5f, size.width * squareWidth * 13.5f),
                     Offset(size.width * squareWidth * 10.5f, size.width * squareWidth * 13.5f),
                     Offset(size.width * squareWidth * 11.5f, size.width * squareWidth * 13.5f),
-                    Offset(size.width * squareWidth * 12.5f, size.width * squareWidth * 13.5f),
-                    Offset(size.width * squareWidth * 13.5f, size.width * squareWidth * 13.5f),
-                    Offset(size.width * squareWidth * 14.5f, size.width * squareWidth * 13.5f),
-                    Offset(size.width * squareWidth * 15.5f, size.width * squareWidth * 13.5f),
 
                     // 15th line
                     Offset(size.width * squareWidth * 0.5f, size.width * squareWidth * 14.5f),
@@ -499,10 +419,6 @@ fun CanvasDrawBoard(
                     Offset(size.width * squareWidth * 9.5f, size.width * squareWidth * 14.5f),
                     Offset(size.width * squareWidth * 10.5f, size.width * squareWidth * 14.5f),
                     Offset(size.width * squareWidth * 11.5f, size.width * squareWidth * 14.5f),
-                    Offset(size.width * squareWidth * 12.5f, size.width * squareWidth * 14.5f),
-                    Offset(size.width * squareWidth * 13.5f, size.width * squareWidth * 14.5f),
-                    Offset(size.width * squareWidth * 14.5f, size.width * squareWidth * 14.5f),
-                    Offset(size.width * squareWidth * 15.5f, size.width * squareWidth * 14.5f),
 
                     // 16th line
                     Offset(size.width * squareWidth * 0.5f, size.width * squareWidth * 15.5f),
@@ -516,215 +432,12 @@ fun CanvasDrawBoard(
                     Offset(size.width * squareWidth * 8.5f, size.width * squareWidth * 15.5f),
                     Offset(size.width * squareWidth * 9.5f, size.width * squareWidth * 15.5f),
                     Offset(size.width * squareWidth * 10.5f, size.width * squareWidth * 15.5f),
-                    Offset(size.width * squareWidth * 11.5f, size.width * squareWidth * 15.5f),
-                    Offset(size.width * squareWidth * 12.5f, size.width * squareWidth * 15.5f),
-                    Offset(size.width * squareWidth * 13.5f, size.width * squareWidth * 15.5f),
-                    Offset(size.width * squareWidth * 14.5f, size.width * squareWidth * 15.5f),
-                    Offset(size.width * squareWidth * 15.5f, size.width * squareWidth * 15.5f),
-
-
-                    // 17th line
-                    Offset(size.width * squareWidth * 0.5f, size.width * squareWidth * 16.5f),
-                    Offset(size.width * squareWidth * 1.5f, size.width * squareWidth * 16.5f),
-                    Offset(size.width * squareWidth * 2.5f, size.width * squareWidth * 16.5f),
-                    Offset(size.width * squareWidth * 3.5f, size.width * squareWidth * 16.5f),
-                    Offset(size.width * squareWidth * 4.5f, size.width * squareWidth * 16.5f),
-                    Offset(size.width * squareWidth * 5.5f, size.width * squareWidth * 16.5f),
-                    Offset(size.width * squareWidth * 6.5f, size.width * squareWidth * 16.5f),
-                    Offset(size.width * squareWidth * 7.5f, size.width * squareWidth * 16.5f),
-                    Offset(size.width * squareWidth * 8.5f, size.width * squareWidth * 16.5f),
-                    Offset(size.width * squareWidth * 9.5f, size.width * squareWidth * 16.5f),
-                    Offset(size.width * squareWidth * 10.5f, size.width * squareWidth * 16.5f),
-                    Offset(size.width * squareWidth * 11.5f, size.width * squareWidth * 16.5f),
-                    Offset(size.width * squareWidth * 12.5f, size.width * squareWidth * 16.5f),
-                    Offset(size.width * squareWidth * 13.5f, size.width * squareWidth * 16.5f),
-                    Offset(size.width * squareWidth * 14.5f, size.width * squareWidth * 16.5f),
-                    Offset(size.width * squareWidth * 15.5f, size.width * squareWidth * 16.5f),
-
-                    // 18th line
-                    Offset(size.width * squareWidth * 0.5f, size.width * squareWidth * 17.5f),
-                    Offset(size.width * squareWidth * 1.5f, size.width * squareWidth * 17.5f),
-                    Offset(size.width * squareWidth * 2.5f, size.width * squareWidth * 17.5f),
-                    Offset(size.width * squareWidth * 3.5f, size.width * squareWidth * 17.5f),
-                    Offset(size.width * squareWidth * 4.5f, size.width * squareWidth * 17.5f),
-                    Offset(size.width * squareWidth * 5.5f, size.width * squareWidth * 17.5f),
-                    Offset(size.width * squareWidth * 6.5f, size.width * squareWidth * 17.5f),
-                    Offset(size.width * squareWidth * 7.5f, size.width * squareWidth * 17.5f),
-                    Offset(size.width * squareWidth * 8.5f, size.width * squareWidth * 17.5f),
-                    Offset(size.width * squareWidth * 9.5f, size.width * squareWidth * 17.5f),
-                    Offset(size.width * squareWidth * 10.5f, size.width * squareWidth * 17.5f),
-                    Offset(size.width * squareWidth * 11.5f, size.width * squareWidth * 17.5f),
-                    Offset(size.width * squareWidth * 12.5f, size.width * squareWidth * 17.5f),
-                    Offset(size.width * squareWidth * 13.5f, size.width * squareWidth * 17.5f),
-                    Offset(size.width * squareWidth * 14.5f, size.width * squareWidth * 17.5f),
-                    Offset(size.width * squareWidth * 15.5f, size.width * squareWidth * 17.5f),
-
-                    // 19th line
-                    Offset(size.width * squareWidth * 0.5f, size.width * squareWidth * 18.5f),
-                    Offset(size.width * squareWidth * 1.5f, size.width * squareWidth * 18.5f),
-                    Offset(size.width * squareWidth * 2.5f, size.width * squareWidth * 18.5f),
-                    Offset(size.width * squareWidth * 3.5f, size.width * squareWidth * 18.5f),
-                    Offset(size.width * squareWidth * 4.5f, size.width * squareWidth * 18.5f),
-                    Offset(size.width * squareWidth * 5.5f, size.width * squareWidth * 18.5f),
-                    Offset(size.width * squareWidth * 6.5f, size.width * squareWidth * 18.5f),
-                    Offset(size.width * squareWidth * 7.5f, size.width * squareWidth * 18.5f),
-                    Offset(size.width * squareWidth * 8.5f, size.width * squareWidth * 18.5f),
-                    Offset(size.width * squareWidth * 9.5f, size.width * squareWidth * 18.5f),
-                    Offset(size.width * squareWidth * 10.5f, size.width * squareWidth * 18.5f),
-                    Offset(size.width * squareWidth * 11.5f, size.width * squareWidth * 18.5f),
-                    Offset(size.width * squareWidth * 12.5f, size.width * squareWidth * 18.5f),
-                    Offset(size.width * squareWidth * 13.5f, size.width * squareWidth * 18.5f),
-                    Offset(size.width * squareWidth * 14.5f, size.width * squareWidth * 18.5f),
-                    Offset(size.width * squareWidth * 15.5f, size.width * squareWidth * 18.5f),
-
-                    // 20th line
-                    Offset(size.width * squareWidth * 0.5f, size.width * squareWidth * 19.5f),
-                    Offset(size.width * squareWidth * 1.5f, size.width * squareWidth * 19.5f),
-                    Offset(size.width * squareWidth * 2.5f, size.width * squareWidth * 19.5f),
-                    Offset(size.width * squareWidth * 3.5f, size.width * squareWidth * 19.5f),
-                    Offset(size.width * squareWidth * 4.5f, size.width * squareWidth * 19.5f),
-                    Offset(size.width * squareWidth * 5.5f, size.width * squareWidth * 19.5f),
-                    Offset(size.width * squareWidth * 6.5f, size.width * squareWidth * 19.5f),
-                    Offset(size.width * squareWidth * 7.5f, size.width * squareWidth * 19.5f),
-                    Offset(size.width * squareWidth * 8.5f, size.width * squareWidth * 19.5f),
-                    Offset(size.width * squareWidth * 9.5f, size.width * squareWidth * 19.5f),
-                    Offset(size.width * squareWidth * 10.5f, size.width * squareWidth * 19.5f),
-                    Offset(size.width * squareWidth * 11.5f, size.width * squareWidth * 19.5f),
-                    Offset(size.width * squareWidth * 12.5f, size.width * squareWidth * 19.5f),
-                    Offset(size.width * squareWidth * 13.5f, size.width * squareWidth * 19.5f),
-                    Offset(size.width * squareWidth * 14.5f, size.width * squareWidth * 19.5f),
-                    Offset(size.width * squareWidth * 15.5f, size.width * squareWidth * 19.5f),
-                    // 21th line
-                    Offset(size.width * squareWidth * 0.5f, size.width * squareWidth * 20.5f),
-                    Offset(size.width * squareWidth * 1.5f, size.width * squareWidth * 20.5f),
-                    Offset(size.width * squareWidth * 2.5f, size.width * squareWidth * 20.5f),
-                    Offset(size.width * squareWidth * 3.5f, size.width * squareWidth * 20.5f),
-                    Offset(size.width * squareWidth * 4.5f, size.width * squareWidth * 20.5f),
-                    Offset(size.width * squareWidth * 5.5f, size.width * squareWidth * 20.5f),
-                    Offset(size.width * squareWidth * 6.5f, size.width * squareWidth * 20.5f),
-                    Offset(size.width * squareWidth * 7.5f, size.width * squareWidth * 20.5f),
-                    Offset(size.width * squareWidth * 8.5f, size.width * squareWidth * 20.5f),
-                    Offset(size.width * squareWidth * 9.5f, size.width * squareWidth * 20.5f),
-                    Offset(size.width * squareWidth * 10.5f, size.width * squareWidth * 20.5f),
-                    Offset(size.width * squareWidth * 11.5f, size.width * squareWidth * 20.5f),
-                    Offset(size.width * squareWidth * 12.5f, size.width * squareWidth * 20.5f),
-                    Offset(size.width * squareWidth * 13.5f, size.width * squareWidth * 20.5f),
-                    Offset(size.width * squareWidth * 14.5f, size.width * squareWidth * 20.5f),
-                    Offset(size.width * squareWidth * 15.5f, size.width * squareWidth * 20.5f),
-
-                    // 22th line
-                    Offset(size.width * squareWidth * 0.5f, size.width * squareWidth * 21.5f),
-                    Offset(size.width * squareWidth * 1.5f, size.width * squareWidth * 21.5f),
-                    Offset(size.width * squareWidth * 2.5f, size.width * squareWidth * 21.5f),
-                    Offset(size.width * squareWidth * 3.5f, size.width * squareWidth * 21.5f),
-                    Offset(size.width * squareWidth * 4.5f, size.width * squareWidth * 21.5f),
-                    Offset(size.width * squareWidth * 5.5f, size.width * squareWidth * 21.5f),
-                    Offset(size.width * squareWidth * 6.5f, size.width * squareWidth * 21.5f),
-                    Offset(size.width * squareWidth * 7.5f, size.width * squareWidth * 21.5f),
-                    Offset(size.width * squareWidth * 8.5f, size.width * squareWidth * 21.5f),
-                    Offset(size.width * squareWidth * 9.5f, size.width * squareWidth * 21.5f),
-                    Offset(size.width * squareWidth * 10.5f, size.width * squareWidth * 21.5f),
-                    Offset(size.width * squareWidth * 11.5f, size.width * squareWidth * 21.5f),
-                    Offset(size.width * squareWidth * 12.5f, size.width * squareWidth * 21.5f),
-                    Offset(size.width * squareWidth * 13.5f, size.width * squareWidth * 21.5f),
-                    Offset(size.width * squareWidth * 14.5f, size.width * squareWidth * 21.5f),
-                    Offset(size.width * squareWidth * 15.5f, size.width * squareWidth * 21.5f),
-
-                    // 23th line
-                    Offset(size.width * squareWidth * 0.5f, size.width * squareWidth * 22.5f),
-                    Offset(size.width * squareWidth * 1.5f, size.width * squareWidth * 22.5f),
-                    Offset(size.width * squareWidth * 2.5f, size.width * squareWidth * 22.5f),
-                    Offset(size.width * squareWidth * 3.5f, size.width * squareWidth * 22.5f),
-                    Offset(size.width * squareWidth * 4.5f, size.width * squareWidth * 22.5f),
-                    Offset(size.width * squareWidth * 5.5f, size.width * squareWidth * 22.5f),
-                    Offset(size.width * squareWidth * 6.5f, size.width * squareWidth * 22.5f),
-                    Offset(size.width * squareWidth * 7.5f, size.width * squareWidth * 22.5f),
-                    Offset(size.width * squareWidth * 8.5f, size.width * squareWidth * 22.5f),
-                    Offset(size.width * squareWidth * 9.5f, size.width * squareWidth * 22.5f),
-                    Offset(size.width * squareWidth * 10.5f, size.width * squareWidth * 22.5f),
-                    Offset(size.width * squareWidth * 11.5f, size.width * squareWidth * 22.5f),
-                    Offset(size.width * squareWidth * 12.5f, size.width * squareWidth * 22.5f),
-                    Offset(size.width * squareWidth * 13.5f, size.width * squareWidth * 22.5f),
-                    Offset(size.width * squareWidth * 14.5f, size.width * squareWidth * 22.5f),
-                    Offset(size.width * squareWidth * 15.5f, size.width * squareWidth * 22.5f),
-
-                    // 24th line
-                    Offset(size.width * squareWidth * 0.5f, size.width * squareWidth * 23.5f),
-                    Offset(size.width * squareWidth * 1.5f, size.width * squareWidth * 23.5f),
-                    Offset(size.width * squareWidth * 2.5f, size.width * squareWidth * 23.5f),
-                    Offset(size.width * squareWidth * 3.5f, size.width * squareWidth * 23.5f),
-                    Offset(size.width * squareWidth * 4.5f, size.width * squareWidth * 23.5f),
-                    Offset(size.width * squareWidth * 5.5f, size.width * squareWidth * 23.5f),
-                    Offset(size.width * squareWidth * 6.5f, size.width * squareWidth * 23.5f),
-                    Offset(size.width * squareWidth * 7.5f, size.width * squareWidth * 23.5f),
-                    Offset(size.width * squareWidth * 8.5f, size.width * squareWidth * 23.5f),
-                    Offset(size.width * squareWidth * 9.5f, size.width * squareWidth * 23.5f),
-                    Offset(size.width * squareWidth * 10.5f, size.width * squareWidth * 23.5f),
-                    Offset(size.width * squareWidth * 11.5f, size.width * squareWidth * 23.5f),
-                    Offset(size.width * squareWidth * 12.5f, size.width * squareWidth * 23.5f),
-                    Offset(size.width * squareWidth * 13.5f, size.width * squareWidth * 23.5f),
-                    Offset(size.width * squareWidth * 14.5f, size.width * squareWidth * 23.5f),
-                    Offset(size.width * squareWidth * 15.5f, size.width * squareWidth * 23.5f),
-
-                    // 25th line
-                    Offset(size.width * squareWidth * 0.5f, size.width * squareWidth * 24.5f),
-                    Offset(size.width * squareWidth * 1.5f, size.width * squareWidth * 24.5f),
-                    Offset(size.width * squareWidth * 2.5f, size.width * squareWidth * 24.5f),
-                    Offset(size.width * squareWidth * 3.5f, size.width * squareWidth * 24.5f),
-                    Offset(size.width * squareWidth * 4.5f, size.width * squareWidth * 24.5f),
-                    Offset(size.width * squareWidth * 5.5f, size.width * squareWidth * 24.5f),
-                    Offset(size.width * squareWidth * 6.5f, size.width * squareWidth * 24.5f),
-                    Offset(size.width * squareWidth * 7.5f, size.width * squareWidth * 24.5f),
-                    Offset(size.width * squareWidth * 8.5f, size.width * squareWidth * 24.5f),
-                    Offset(size.width * squareWidth * 9.5f, size.width * squareWidth * 24.5f),
-                    Offset(size.width * squareWidth * 10.5f, size.width * squareWidth * 24.5f),
-                    Offset(size.width * squareWidth * 11.5f, size.width * squareWidth * 24.5f),
-                    Offset(size.width * squareWidth * 12.5f, size.width * squareWidth * 24.5f),
-                    Offset(size.width * squareWidth * 13.5f, size.width * squareWidth * 24.5f),
-                    Offset(size.width * squareWidth * 14.5f, size.width * squareWidth * 24.5f),
-                    Offset(size.width * squareWidth * 15.5f, size.width * squareWidth * 24.5f),
-
-                    // 26th line
-                    Offset(size.width * squareWidth * 0.5f, size.width * squareWidth * 25.5f),
-                    Offset(size.width * squareWidth * 1.5f, size.width * squareWidth * 25.5f),
-                    Offset(size.width * squareWidth * 2.5f, size.width * squareWidth * 25.5f),
-                    Offset(size.width * squareWidth * 3.5f, size.width * squareWidth * 25.5f),
-                    Offset(size.width * squareWidth * 4.5f, size.width * squareWidth * 25.5f),
-                    Offset(size.width * squareWidth * 5.5f, size.width * squareWidth * 25.5f),
-                    Offset(size.width * squareWidth * 6.5f, size.width * squareWidth * 25.5f),
-                    Offset(size.width * squareWidth * 7.5f, size.width * squareWidth * 25.5f),
-                    Offset(size.width * squareWidth * 8.5f, size.width * squareWidth * 25.5f),
-                    Offset(size.width * squareWidth * 9.5f, size.width * squareWidth * 25.5f),
-                    Offset(size.width * squareWidth * 10.5f, size.width * squareWidth * 25.5f),
-                    Offset(size.width * squareWidth * 11.5f, size.width * squareWidth * 25.5f),
-                    Offset(size.width * squareWidth * 12.5f, size.width * squareWidth * 25.5f),
-                    Offset(size.width * squareWidth * 13.5f, size.width * squareWidth * 25.5f),
-                    Offset(size.width * squareWidth * 14.5f, size.width * squareWidth * 25.5f),
-                    Offset(size.width * squareWidth * 15.5f, size.width * squareWidth * 25.5f),
-
-                    // 27th line
-                    Offset(size.width * squareWidth * 0.5f, size.width * squareWidth * 26.5f),
-                    Offset(size.width * squareWidth * 1.5f, size.width * squareWidth * 26.5f),
-                    Offset(size.width * squareWidth * 2.5f, size.width * squareWidth * 26.5f),
-                    Offset(size.width * squareWidth * 3.5f, size.width * squareWidth * 26.5f),
-                    Offset(size.width * squareWidth * 4.5f, size.width * squareWidth * 26.5f),
-                    Offset(size.width * squareWidth * 5.5f, size.width * squareWidth * 26.5f),
-                    Offset(size.width * squareWidth * 6.5f, size.width * squareWidth * 26.5f),
-                    Offset(size.width * squareWidth * 7.5f, size.width * squareWidth * 26.5f),
-                    Offset(size.width * squareWidth * 8.5f, size.width * squareWidth * 26.5f),
-                    Offset(size.width * squareWidth * 9.5f, size.width * squareWidth * 26.5f),
-                    Offset(size.width * squareWidth * 10.5f, size.width * squareWidth * 26.5f),
-                    Offset(size.width * squareWidth * 11.5f, size.width * squareWidth * 26.5f),
-                    Offset(size.width * squareWidth * 12.5f, size.width * squareWidth * 26.5f),
-                    Offset(size.width * squareWidth * 13.5f, size.width * squareWidth * 26.5f),
-                    Offset(size.width * squareWidth * 14.5f, size.width * squareWidth * 26.5f),
-                    Offset(size.width * squareWidth * 15.5f, size.width * squareWidth * 26.5f),
-                ),
-                pointMode = PointMode.Points,
+                    Offset(size.width * squareWidth * 11.5f, size.width * squareWidth * 15.5f)
+            ),
+            pointMode = PointMode.Points,
                 color = Color.DarkGray,
                 strokeWidth = size.width * 0.005f,
             )
-            */
         }
     }
 }
