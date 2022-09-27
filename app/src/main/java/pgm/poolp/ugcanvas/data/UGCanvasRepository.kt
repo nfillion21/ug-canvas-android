@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 class UGCanvasRepository @Inject constructor () {
 
-    val dbReference = Firebase.database("https://ug-canvas-default-rtdb.europe-west1.firebasedatabase.app/").getReference("canvas")
+    private val dbReference = Firebase.database("https://ug-canvas-default-rtdb.europe-west1.firebasedatabase.app/").getReference("canvas")
 
     @OptIn(ExperimentalCoroutinesApi::class)
     fun getDataBoard() = callbackFlow {
