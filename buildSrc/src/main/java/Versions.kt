@@ -3,7 +3,7 @@ object Versions {
     const val gradlePlugin = "4.2.1"
     const val kotlin = "1.5.0"
 
-    const val gmsVersion = "4.3.10"
+    const val gmsVersion = "4.3.14"
 
     const val startupVersion = "1.0.0"
 
@@ -15,7 +15,7 @@ object Versions {
     const val junitAndroidX = "1.3.3"
     const val expressoAndroidX = "3.4.0"
 
-    const val hiltVersion = "2.38.1"
+    const val hiltVersion = "2.43.2"
     const val hiltNavigationComposeVersion = "1.0.0"
     const val roomVersion = "2.4.1"
 
